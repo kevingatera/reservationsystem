@@ -1,4 +1,4 @@
-package com.ehotelreservations.model;
+package com.ehotelreservations.reservationsystem.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

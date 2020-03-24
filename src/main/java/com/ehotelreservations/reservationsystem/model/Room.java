@@ -1,4 +1,4 @@
-package com.ehotelreservations.model;
+package com.ehotelreservations.reservationsystem.model;
 
 public class Room {
 

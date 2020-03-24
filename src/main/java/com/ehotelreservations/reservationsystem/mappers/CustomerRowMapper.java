@@ -1,8 +1,8 @@
-package com.ehotelreservations.mappers;
+package com.ehotelreservations.reservationsystem.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.ehotelreservations.model.Customer;
+import com.ehotelreservations.reservationsystem.model.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

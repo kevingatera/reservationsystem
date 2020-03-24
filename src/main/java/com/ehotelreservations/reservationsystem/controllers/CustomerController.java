@@ -1,12 +1,12 @@
-package com.ehotelreservations.controllers;
+package com.ehotelreservations.reservationsystem.controllers;
 
 import java.util.ArrayList;
 // import java.util.Arrays;
 import java.util.List;
 
-import com.ehotelreservations.model.Customer;
-import com.ehotelreservations.model.CustomerUI;
-import com.ehotelreservations.repositories.CustomerRepository;
+import com.ehotelreservations.reservationsystem.model.Customer;
+import com.ehotelreservations.reservationsystem.model.CustomerUI;
+import com.ehotelreservations.reservationsystem.repositories.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomerController {
+
   @Autowired
   CustomerRepository repository;
 
@@ -44,16 +45,20 @@ public class CustomerController {
   }
 
   @GetMapping("/findall")
-  public List<CustomerUI> findAll() {
+  // public List<CustomerUI> findAll() {
+  public String findAll() {
 
-    List<Customer> customers = repository.findAll();
-    List<CustomerUI> customerUI = new ArrayList<>();
+    // List<Customer> customers = repository.findAll();
+    // List<CustomerUI> customerUI = new ArrayList<>();
 
-    for (Customer customer : customers) {
-      customerUI.add(new CustomerUI(customer.getFirstName(), customer.getLastName()));
-    }
+    // for (Customer customer : customers) {
+    // customerUI.add(new CustomerUI(customer.getFirstName(),
+    // customer.getLastName()));
+    // }
 
-    return customerUI;
+    // return customerUI;
+
+    return "Found!";
   }
 
   @RequestMapping("/search/{id}")
