@@ -56,3 +56,12 @@ body {
   color: gray;
   text-align: center;
 }
+
+
+.modal-header {
+    display: block;
+}
+
+.modal-body .form-control {
+    padding: 15px;
+}
