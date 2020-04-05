@@ -15,6 +15,8 @@
     <h2>Welcome ${pageContext.request.userPrincipal.name} </h2>
   </div>
   
+  <jsp:include page="components/_addEmployeeModal.jsp"></jsp:include>
+  
 </body>
 
 </html>

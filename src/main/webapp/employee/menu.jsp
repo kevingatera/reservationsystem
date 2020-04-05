@@ -13,10 +13,10 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <li class="nav-item">
-            <a class="nav-link" href="/addNewEmployee">Add Employee</a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#addEmployeeModal">Add Employee</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/getEmployees">Show Employees</a>
+            <a class="nav-link" href="/employee/getEmployees">Show Employees</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" onclick="document.forms['logoutForm'].submit()">Logout</a>
@@ -24,6 +24,7 @@
       </ul>
     
     </nav>
+
 
   </c:if>
 
