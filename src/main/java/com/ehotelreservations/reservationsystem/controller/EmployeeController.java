@@ -1,9 +1,6 @@
 package com.ehotelreservations.reservationsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,10 +23,8 @@ import com.ehotelreservations.reservationsystem.service.SecurityService;
 import com.ehotelreservations.reservationsystem.validator.UserValidator;
 
 @Controller
-@RequestMapping("/employee/")
+@RequestMapping("/employee")
 public class EmployeeController {
-  @Autowired
-  EmployeeService service;
 
   @Autowired
   private EmployeeService employeeService;
@@ -39,7 +34,6 @@ public class EmployeeController {
 
   @Autowired
   private UserValidator userValidator;
-
 
   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -63,7 +57,7 @@ public class EmployeeController {
 
     securityService.autoLogin(userForm.getUsername(), userForm.getPassword());
 
-    return "redirect:/welcome";
+    return "redirect:/employee/index";
   }
 
   // TODO: This gets handled magically for now
@@ -93,32 +87,16 @@ public class EmployeeController {
     return "employee/login";
   }
 
-  @GetMapping({ "/", "/welcome" })
+  @GetMapping({ "/", "/index" })
   public String welcome(Model model) {
-    return "employee/welcome";
+    return "employee/index";
   }
 
-  @GetMapping("/findall")
-  public ResponseEntity<List<Employee>> getAllEmployees(@RequestParam(defaultValue = "0") Integer pageNo,
-      @RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy) {
-
-    List<Employee> list = service.getAllEmployees();
-    // getAllEmployees(pageNo, pageSize, sortBy);
-
-    return new ResponseEntity<List<Employee>>(list, new HttpHeaders(), HttpStatus.OK);
+  @GetMapping("/getEmployees")
+  public String getEmployees(Model model) {
+    List<Employee> list = employeeService.getAllEmployees();
+    model.addAttribute("employeeList", list);
+    return "employee/getEmployees";
   }
 
-  @RequestMapping("/searchbyfirstname/{firstname}")
-  public ResponseEntity<List<Employee>> fetchDataByLastName(@PathVariable String firstname) {
-
-    List<Employee> list = service.findByFirstName(firstname);
-
-    return new ResponseEntity<List<Employee>>(list, new HttpHeaders(), HttpStatus.OK);
-  }
-
-  @RequestMapping("/search/{id}")
-  public ResponseEntity<Employee> search(@PathVariable long id) {
-    Employee employee = service.findById(id);
-    return new ResponseEntity<Employee>(employee, new HttpHeaders(), HttpStatus.OK);
-  }
 }

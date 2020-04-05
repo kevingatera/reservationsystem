@@ -1,5 +1,6 @@
 package com.ehotelreservations.reservationsystem.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,14 +13,30 @@ import lombok.Data;
 @Entity
 @Table(name="employee")
 public class Employee {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private String employee_ID;
-    private String first_name;
-    private String last_name;
+    @Column(name = "employee_id")
+    private Integer id;
+
+    @Column(name = "first_name")
+    private String firstName;
+    
+    @Column(name = "last_name")
+    private String lastName;
+    
+    @Column(name = "email")
     private String email;
+    
+    @Column(name = "position")
     private String position;
+    
+    @Column(name = "salary")
     private String salary;
+    
+    @Column(name = "branch_id")
     private String branch_ID;
+    
+    @Column(name = "phone")
     private String phone;
 }
