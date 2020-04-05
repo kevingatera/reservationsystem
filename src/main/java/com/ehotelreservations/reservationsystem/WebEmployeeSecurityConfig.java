@@ -46,7 +46,7 @@ public class WebEmployeeSecurityConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/employee/login") // Submit URL
         .loginPage("/employee/login")//
         .failureUrl("/employee/login?error=true")//
-        .defaultSuccessUrl("/")//
+        .defaultSuccessUrl("/employee/index")//
         .permitAll()//
         .and()//
         .logout()//
