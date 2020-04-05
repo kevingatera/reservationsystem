@@ -1,30 +1,25 @@
 package com.ehotelreservations.reservationsystem.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="employee")
 public class Employee {
-
-	// employee here has employeeid and password attributes
-
-	private String employee_id;
-	private String employee_pass;
-
-	public Employee() {
-
-	}
-
-	public String getEmployee_id() {
-		return employee_id;
-	}
-
-	public void setEmployee_id(String employee_id) {
-		this.employee_id = employee_id;
-	}
-
-	public String getEmployee_pass() {
-		return employee_pass;
-	}
-
-	public void setEmployee_pass(String employee_pass) {
-		this.employee_pass = employee_pass;
-	}
-
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private String employee_ID;
+    private String first_name;
+    private String last_name;
+    private String email;
+    private String position;
+    private String salary;
+    private String branch_ID;
+    private String phone;
 }

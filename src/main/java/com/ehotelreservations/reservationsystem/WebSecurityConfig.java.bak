@@ -1,0 +1,172 @@
+package com.ehotelreservations.reservationsystem;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+  @Qualifier("userDetailsServiceImpl")
+  @Autowired
+  private UserDetailsService userDetailsService;
+
+  @Bean
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
+  @Autowired
+  PasswordEncoder passwordEncoder;
+
+  @Autowired
+  DataSource dataSource;
+
+  // @Override
+  // protected void configure(AuthenticationManagerBuilder auth) throws Exception
+  // {
+  // auth.jdbcAuthentication().dataSource(dataSource)
+  // .usersByUsernameQuery("select username,password, enabled from users where
+  // username=?")
+  // .authoritiesByUsernameQuery("select username, role from user_roles where
+  // username=?");
+
+  // // auth.inMemoryAuthentication().passwordEncoder(passwordEncoder)//
+  // //
+  // .withUser("user").password(passwordEncoder.encode("hacker4ever")).roles("GUEST")//
+  // // .and()//
+  // //
+  // .withUser("admin").password(passwordEncoder.encode("hacker4ever")).roles("USER",
+  // "ADMIN");
+  // }
+
+  // @Override
+  // protected void configure(HttpSecurity http) throws Exception {
+  // http.authorizeRequests().antMatchers("/resources/**",
+  // "/registration").permitAll()
+  // // .hasAnyRole("ADMIN", "USER")
+  // .anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")
+  // .failureUrl("/login?error=true").permitAll().permitAll().and().logout().permitAll().and().logout()
+  // .logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll().and().csrf().disable();
+  // }
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()//
+        .antMatchers("/resources/**", "/employee/registration", "/guest/registration", "/host/registration").permitAll()//
+        .antMatchers("/guest/**").hasAuthority("GUEST")//
+        .antMatchers("/host/**").hasAuthority("HOST")//
+        .antMatchers("/employee/**").hasAuthority("EMPLOYEE")//
+        .anyRequest().authenticated()//
+        .and()//
+        .formLogin()//
+        // Submit URL of employee login page.
+        .loginProcessingUrl("**/login") // Submit URL
+        .loginPage("**/login")//
+        .failureUrl("**/login?error=true")//
+        .defaultSuccessUrl("/")//
+        .permitAll()//
+        // .and()//
+        // .formLogin()//
+        // // Submit URL of guest login page.
+        // .loginProcessingUrl("/guest/login") // Submit URL
+        // .loginPage("/guest/login")//
+        // .failureUrl("/guest/login?error=true")//
+        // .defaultSuccessUrl("/")//
+        // .permitAll()//
+        // .and()//
+        // .formLogin()//
+        // // Submit URL of host login page.
+        // .loginProcessingUrl("/host/login") // Submit URL
+        // .loginPage("/host/login")//
+        // .failureUrl("/host/login?error=true")//
+        // .defaultSuccessUrl("/")//
+        // .permitAll()//
+        .and()//
+        .logout()//
+        .permitAll();
+  }
+
+  // @Override
+  // protected void configure(HttpSecurity http) throws Exception {
+
+  // String loginPage = "/login";
+  // String logoutPage = "/logout";
+
+  // http.authorizeRequests()//
+  // .antMatchers("/").permitAll()//
+  // .antMatchers(loginPage).permitAll()//
+  // .antMatchers("/registration").permitAll()//
+  // .antMatchers("/admin/**").hasAuthority("ADMIN")//
+  // .anyRequest()//
+  // .authenticated()//
+  // .and().csrf().disable()//
+  // .formLogin()//
+  // .loginPage(loginPage)//
+  // .loginPage("/")//
+  // .failureUrl("/login?error=true")//
+  // .defaultSuccessUrl("/admin/home")//
+  // .usernameParameter("user_name")//
+  // .passwordParameter("password")//
+  // .and().logout()//
+  // .logoutRequestMatcher(new AntPathRequestMatcher(logoutPage))//
+  // .logoutSuccessUrl(loginPage).and().exceptionHandling();
+  // }
+
+  // http.authorizeRequests()//
+  // .antMatchers("/resources/**", "/registration").permitAll()//
+  // .anyRequest().authenticated()//
+  // .and()//
+  // .formLogin()//
+  // // Submit URL of login page.
+  // .loginProcessingUrl("/login") // Submit URL
+  // .loginPage("/login")//
+  // .failureUrl("/login?error=true")//
+  // .defaultSuccessUrl("/")//
+  // .permitAll()//
+  // .and()//
+  // .logout()//
+  // .permitAll();
+
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring()//
+        .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+  }
+
+  @Bean
+  public AuthenticationManager customAuthenticationManager() throws Exception {
+    return authenticationManager();
+  }
+
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+  }
+
+  /**
+   * 
+   * @param dataSource
+   * @return JdbcTemplate or NamedParameterJdbcTemplate
+   */
+  @Bean
+  public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+    return new JdbcTemplate(dataSource);
+  }
+
+}
