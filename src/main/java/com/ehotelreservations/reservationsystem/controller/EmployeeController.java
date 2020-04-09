@@ -17,8 +17,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ehotelreservations.reservationsystem.model.Employee;
+import com.ehotelreservations.reservationsystem.model.Guest;
+import com.ehotelreservations.reservationsystem.model.Host;
 import com.ehotelreservations.reservationsystem.model.User;
 import com.ehotelreservations.reservationsystem.service.EmployeeService;
+import com.ehotelreservations.reservationsystem.service.GuestService;
+import com.ehotelreservations.reservationsystem.service.HostService;
 import com.ehotelreservations.reservationsystem.service.SecurityService;
 import com.ehotelreservations.reservationsystem.validator.UserValidator;
 
@@ -28,6 +32,12 @@ public class EmployeeController {
 
   @Autowired
   private EmployeeService employeeService;
+
+  @Autowired
+  private GuestService guestService;
+
+  @Autowired
+  private HostService hostService;
 
   @Autowired
   private SecurityService securityService;
@@ -89,14 +99,7 @@ public class EmployeeController {
 
   @GetMapping({ "/", "/index" })
   public String welcome(Model model) {
-    return "employee/index";
-  }
-
-  @GetMapping("/getEmployees")
-  public String getEmployees(Model model) {
-    List<Employee> list = employeeService.getAllEmployees();
-    model.addAttribute("employeeList", list);
-    return "employee/getEmployees";
-  }
-
+    return "employee/dashboard/index";
+  }  
+  
 }
