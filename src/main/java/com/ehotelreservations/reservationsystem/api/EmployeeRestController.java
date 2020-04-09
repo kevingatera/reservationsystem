@@ -3,6 +3,7 @@ package com.ehotelreservations.reservationsystem.api;
 import java.util.List;
 import java.util.Optional;
 
+import com.ehotelreservations.reservationsystem.api.helpers.AbstractRestHandler;
 import com.ehotelreservations.reservationsystem.model.Employee;
 import com.ehotelreservations.reservationsystem.service.EmployeeService;
 
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/employee/")
-public class EmployeeRestController {
+public class EmployeeRestController extends AbstractRestHandler {
 
   @Autowired
   EmployeeService employeeService;
