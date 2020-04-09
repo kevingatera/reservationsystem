@@ -5,17 +5,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<jsp:include page="../_header.jsp" >
+<jsp:include page="../../_header.jsp" >
     <jsp:param name="title" value="Dashboard"/>
 </jsp:include>
 
-<jsp:include page="menu.jsp" />
+<jsp:include page="../menu.jsp" />
 <body>
   <div class="container">
     <h2>Welcome ${pageContext.request.userPrincipal.name} </h2>
   </div>
   
-  <jsp:include page="components/_addEmployeeModal.jsp"></jsp:include>
+  <%-- <jsp:include page="components/_addEmployeeModal.jsp"></jsp:include> --%>
   
 </body>
 
