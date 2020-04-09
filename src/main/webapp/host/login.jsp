@@ -31,30 +31,6 @@
     </form>
   </div>
 
-  <%-- <!-- <div class="container">
-    <form:form method="POST" action="${contextPath}/login" modelAttribute="loginForm" class="form-signin">
-      <h2 class="form-signin-heading">Create your account</h2>
-
-      <spring:bind path="username">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="text" path="username" class="form-control" placeholder="Username" autofocus="true" />
-          <form:errors path="username"></form:errors>
-        </div>
-      </spring:bind>
-
-      <spring:bind path="password">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="password" path="password" class="form-control" placeholder="Password" />
-          <form:errors path="password"></form:errors>
-        </div>
-      </spring:bind>
-
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-      <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
-    </form:form>
-
-  </div> --> --%>
-
   <jsp:include page="../_footer.jsp"></jsp:include>
 
 </body>
