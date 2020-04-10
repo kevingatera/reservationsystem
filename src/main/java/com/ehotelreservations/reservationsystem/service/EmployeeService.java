@@ -5,7 +5,6 @@ import com.ehotelreservations.reservationsystem.repository.EmployeeRepository;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 import com.ehotelreservations.reservationsystem.enums.RoleName;
 import com.ehotelreservations.reservationsystem.model.Employee;
@@ -28,7 +27,6 @@ public class EmployeeService {
 
   @Autowired
   private RoleService roleService;
-  
 
   private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
@@ -36,16 +34,16 @@ public class EmployeeService {
     return employeeRepository.findAll();
   }
   // {
-    
-    public List<Employee> findByFirstName(String firstname) {
-      return employeeRepository.findByFirstName(firstname);
-    }
-    
-    public List<Employee> findByLastName(String lastname) {
-      return employeeRepository.findByLastName(lastname);
-    }
 
-  public Optional<Employee> findById(int id) {
+  public List<Employee> findByFirstName(String firstname) {
+    return employeeRepository.findByFirstName(firstname);
+  }
+
+  public List<Employee> findByLastName(String lastname) {
+    return employeeRepository.findByLastName(lastname);
+  }
+
+  public Employee findById(int id) {
     return employeeRepository.findById(id);
   }
 
@@ -54,23 +52,22 @@ public class EmployeeService {
     userForm.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
     try {
-      Employee employee = new Employee();
-      employee.setEmail(userForm.getEmail());
-      employee.setBranch_ID("Branch A");
-      employee.setFirstName(userForm.getFirstName());
-      employee.setLastName(userForm.getLastName());
-      employee.setPhone(userForm.getPhoneNumber());
+      Employee employee = (Employee) userForm;
+      // employee.setEmail(userForm.getEmail());
+      // employee.setBranch_ID("Branch A");
+      // employee.setFirstName(userForm.getFirstName());
+      // employee.setLastName(userForm.getLastName());
+      // employee.setPhone(userForm.getPhoneNumber());
       // employee.setPosition(userForm.setPosition());
       // employee.setSalary(userForm.getSalary());;
       employeeRepository.save(employee);
       userService.save(userForm);
     } catch (Exception e) {
       logger.error("BAM", e);
-      //TODO: handle exception
+      // TODO: handle exception
     }
 
   }
-
 
   // public List<Employee> getAllEmployees(Integer pageNo, Integer pageSize,
   // String sortBy)

@@ -1,6 +1,5 @@
 package com.ehotelreservations.reservationsystem.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.model.Property;
@@ -8,36 +7,60 @@ import com.ehotelreservations.reservationsystem.repository.PropertyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
+
+/*
+ * Service to demonstrate what the API would use to get things done
+ */
 @Service
 public class PropertyService {
+
+  // private static final Logger log =
+  // LoggerFactory.getLogger(PropertyService.class);
+
   @Autowired
-  PropertyRepository repository;
+  PropertyRepository propertyRepository;
 
-  // public List<Property> findAll(Integer pageNo, Integer pageSize, String
-  // sortBy) {
-  // Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-  // Page<Property> pagedResult = repository.findAll(paging);
-  // if (pagedResult.hasContent()) {
-  // return pagedResult.getContent();
-  // } else {
-  // return new ArrayList<Property>();
-  // }
-  // }
-
-  public List<Property> findAll(){
-
-    List<Property> properties = repository.getRentedProperties();
-    if (properties.isEmpty()) {
-      return new ArrayList<Property>();
-    } else {
-      return properties;
-    }
-
-
+  public PropertyService() {
   }
+
+  public Property createProperty(Property Property) {
+    return propertyRepository.save(Property);
+  }
+
+  public Property getProperty(int id) {
+    return propertyRepository.findById(id);
+  }
+
+  public void updateProperty(Property Property) {
+    propertyRepository.save(Property);
+  }
+
+  public void deleteProperty(int id) {
+    propertyRepository.deleteById(id);
+  }
+
+  public List<Property> getAllProperties() {
+    return propertyRepository.findAll();
+  }
+
+  // http://goo.gl/7fxvVf
+  // public Page<Property> getAllPropertys(Integer pageNo, Integer pageSize) {
+
+  // Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("name"));
+
+  // Page<Property> pagedResult = propertyRepository.findAll(paging);
+  // return pagedResult;
+  // }
+
+  // public List<Property> getAllProperties(Integer pageNo, Integer pageSize,
+  // String sortBy) {
+  // Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+  // Page<Property> pagedResult = propertyRepository.findAll(paging);
+  // return pagedResult.getContent();
+  // }
+
 }
