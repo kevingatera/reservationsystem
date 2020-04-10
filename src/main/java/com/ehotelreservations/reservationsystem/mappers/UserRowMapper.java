@@ -14,11 +14,11 @@ public class UserRowMapper implements RowMapper<User> {
 
     User user = new User();
     user.setUsername(rs.getString("username"));
-    user.setId(rs.getInt("ID"));
+    user.setUserID(rs.getInt("user_ID"));
     user.setPassword(rs.getString("password"));
     // user.setRoles(rs.getInt("AGE"));
     user.setCreatedDate(rs.getTimestamp("created_date").toLocalDateTime());
-    
+
     return user;
 
   }

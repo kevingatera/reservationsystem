@@ -13,17 +13,17 @@ public class PropertyRowMapper implements RowMapper<Property> {
   public Property mapRow(ResultSet rs, int rowNum) throws SQLException {
 
     Property property = new Property();
-    property.setProperty_ID(rs.getInt("property_ID"));
-    property.setProperty_type(rs.getString("property_type"));
-    property.setRoom_type(rs.getString("room_type"));
+    property.setPropertyId(rs.getInt("property_ID"));
+    property.setType(rs.getString("property_type"));
+    property.setRoomType(rs.getString("room_type"));
     property.setBedrooms(rs.getInt("bedrooms"));
     property.setBathrooms(rs.getInt("bathrooms"));
-    property.setMax_guests(rs.getInt("max_guests"));
-    property.setProperty_description(rs.getString("property_description"));
+    property.setMaxGuests(rs.getInt("max_guests"));
+    property.setDescription(rs.getString("property_description"));
     property.setAvailable(rs.getString("available"));
-    property.setReview_avg(rs.getDouble("review_avg"));
-    property.setBranch_ID(rs.getInt("branch_ID"));
-    property.setHost_ID(rs.getInt("host_ID"));
+    property.setReviewAverage(rs.getDouble("review_avg"));
+    property.setBranchID(rs.getInt("branch_ID"));
+    property.setHostID(rs.getInt("host_ID"));
 
     return property;
 

@@ -2,6 +2,7 @@ package com.ehotelreservations.reservationsystem.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.ehotelreservations.reservationsystem.enums.RoleName;
 import com.ehotelreservations.reservationsystem.model.Role;
 
 import java.sql.ResultSet;
@@ -13,11 +14,10 @@ public class RoleRowMapper implements RowMapper<Role> {
   public Role mapRow(ResultSet rs, int rowNum) throws SQLException {
 
     Role role = new Role();
-    // role.setType("type");
-    // // setID(rs.getLong("ID"));
+    role.setName(RoleName.valueOf(rs.getString("role_name")));
+    role.setId(rs.getInt("role_ID"));
+    // setID(rs.getLong("ID"));
     // role.setUsers(rs.getString("password"));
-    // // role.setRoles(rs.getInt("AGE"));
-    // role.setCreatedDate(rs.getTimestamp("created_date").toLocalDateTime());
 
     return role;
 

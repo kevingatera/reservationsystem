@@ -1,3 +1,4 @@
+
 package com.ehotelreservations.reservationsystem.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
@@ -13,10 +14,14 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
   public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 
     Employee employee = new Employee();
-    // employee.setID(rs.getLong("ID"));
-    // employee.setFirstName(rs.getString("First_name"));
-    // employee.setLastName(rs.getString("Last_name"));
-    // employee.setAge(rs.getInt("AGE"));
+    employee.setId(rs.getInt("employee_ID"));
+    employee.setFirstName(rs.getString("first_name"));
+    employee.setLastName(rs.getString("last_name"));
+    employee.setEmail(rs.getString("email"));
+    employee.setPosition(rs.getString("assigned_position"));
+    employee.setSalary(rs.getFloat("salary"));
+    employee.setBranch_ID(rs.getInt("branch_ID"));
+    employee.setPhone(rs.getString("phone"));
     // employee.setCreatedDate(rs.getTimestamp("created_date").toLocalDateTime());
 
     return employee;
