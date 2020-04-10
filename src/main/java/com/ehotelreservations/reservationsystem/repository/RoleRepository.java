@@ -1,69 +1,88 @@
 package com.ehotelreservations.reservationsystem.repository;
 
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 import com.ehotelreservations.reservationsystem.enums.RoleName;
-import com.ehotelreservations.reservationsystem.model.Role;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
-public interface RoleRepository extends JpaRepository<Role, Integer> {
-
-  boolean existsRoleByName(RoleName name);
-
-  Role findByName(RoleName name);
-
-  @Query(value = "SELECT * FROM role r WHERE id = :id", nativeQuery = true)
-  Optional<Role> findById(@Param("id") int id);
-
-}
-
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.dao.EmptyResultDataAccessException;
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import org.springframework.jdbc.core.JdbcTemplate;
-// import org.springframework.stereotype.Repository;
-
-// import lombok.extern.slf4j.Slf4j;
+import com.ehotelreservations.reservationsystem.mappers.RoleRowMapper;
 
 // import java.time.LocalDateTime;
-// import java.util.List;
-// import java.util.Optional;
-
-// import com.ehotelreservations.reservationsystem.enums.RoleName;
-
-// // import lombok.extern.slf4j.Slf4j;
 
 // import com.ehotelreservations.reservationsystem.mappers.RoleRowMapper;
-// import com.ehotelreservations.reservationsystem.model.Role;
+import com.ehotelreservations.reservationsystem.model.Role;
 
-// // @Repository
-// // public class RoleRepository {
+@Repository
+public class RoleRepository {
 
-// // @Autowired
-// // private JdbcTemplate jdbcTemplate;
+    public static final Logger LOGGER = LoggerFactory.getLogger(RoleRepository.class);
 
-// // boolean existsRoleByType(RoleName type) {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-// // };
+    public int save(Role user) {
+        return jdbcTemplate.update("insert into ROLES (role_id, role_name) values(?,?)", user.getId(), user.getName());
+    }
 
-// // Role findByType(RoleName type) {
-// // String sql = "SELECT * FROM ROLES WHERE TYPE = ?";
+    public List<Role> findAll() {
+        String sql = "SELECT * FROM ROLE";
+        List<Role> users = jdbcTemplate.query(sql, new RoleRowMapper());
 
-// // try {
-// // Role user = jdbcTemplate.queryForObject(sql, new Object[] { type }, new
-// RoleRowMapper());
-// // return user;
+        return users;
+    }
 
-// // } catch (EmptyResultDataAccessException e) {
-// // return null;
-// // }
+    public Role findByName(String name) {
+        String sql = "SELECT * FROM ROLE WHERE role_NAME = ?";
+        try {
+            Role user = jdbcTemplate.queryForObject(sql, new Object[] { name }, new RoleRowMapper());
+            return user;
 
-// // };
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
 
-// // @Query(value = "SELECT * FROM role r WHERE id = :id", nativeQuery = true)
-// // Role findById(@Param("id") int id);
+    }
 
-// // }
+    public Role findById(int id) {
+        String sql = "SELECT * FROM ROLE WHERE role_ID = ?";
+        try {
+            Role user = jdbcTemplate.queryForObject(sql, new Object[] { id }, new RoleRowMapper());
+            return user;
+
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public int count() {
+        String sql = "SELECT COUNT(*) FROM ROLE";
+        // queryForInt() is Deprecated
+        // https://www.mkyong.com/spring/jdbctemplate-queryforint-is-deprecated/
+        // int total = jdbcTemplate.queryForInt(sql);
+
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+
+    }
+
+    public boolean existsRoleByName(RoleName name) {
+        return false;
+    }
+
+    public Role findByUserId(int id) {
+        String sql = "SELECT role_ID FROM users_role WHERE user_ID = ?";
+        try {
+            int roleID = jdbcTemplate.queryForObject(sql, new Object[] { id }, Integer.class);
+            Role role = findById(roleID);
+            return role;
+
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+}
