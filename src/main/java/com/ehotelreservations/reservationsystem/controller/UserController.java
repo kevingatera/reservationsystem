@@ -1,9 +1,5 @@
 package com.ehotelreservations.reservationsystem.controller;
 
-import java.util.ArrayList;
-
-import com.ehotelreservations.reservationsystem.enums.RoleName;
-import com.ehotelreservations.reservationsystem.model.Role;
 import com.ehotelreservations.reservationsystem.model.User;
 import com.ehotelreservations.reservationsystem.service.RoleService;
 import com.ehotelreservations.reservationsystem.service.SecurityService;
@@ -17,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -61,19 +56,20 @@ public class UserController {
 
     // TODO: This gets handled magically for now
     // @PostMapping("/login")
-    // public String login(@ModelAttribute("loginForm") User loginForm, BindingResult bindingResult) {
-    //     // userValidator.validate(loginForm, bindingResult);
-    //     if (bindingResult.hasErrors()) {
-    //         return "login";
-    //     }
-    //     securityService.autoLogin(loginForm.getUsername(), loginForm.getPassword());
-    //     return "redirect:/welcome";
+    // public String login(@ModelAttribute("loginForm") User loginForm,
+    // BindingResult bindingResult) {
+    // // userValidator.validate(loginForm, bindingResult);
+    // if (bindingResult.hasErrors()) {
+    // return "login";
+    // }
+    // securityService.autoLogin(loginForm.getUsername(), loginForm.getPassword());
+    // return "redirect:/welcome";
     // }
 
     @GetMapping("/login")
     public String login(@RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout, Model model) {
-                // model.addAttribute("loginForm", new User());
+        // model.addAttribute("loginForm", new User());
         if (error != null) {
             logger.error("BAM", error);
             model.addAttribute("error", "Your username and password is invalid." + error);

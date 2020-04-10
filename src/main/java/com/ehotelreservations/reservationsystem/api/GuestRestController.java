@@ -1,7 +1,6 @@
 package com.ehotelreservations.reservationsystem.api;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.ehotelreservations.reservationsystem.api.helpers.AbstractRestHandler;
 import com.ehotelreservations.reservationsystem.model.Guest;
@@ -50,12 +49,11 @@ public class GuestRestController extends AbstractRestHandler {
     return new ResponseEntity<List<Guest>>(list, new HttpHeaders(), HttpStatus.OK);
   }
 
-
   @RequestMapping("/search/{id}")
   public ResponseEntity<Guest> search(@PathVariable int id) {
-    Optional<Guest> guest = guestService.findById(id);
-    if (guest.isPresent()) {
-      return new ResponseEntity<Guest>(guest.get(), new HttpHeaders(), HttpStatus.OK);
+    Guest guest = guestService.findById(id);
+    if (guest != null) {
+      return new ResponseEntity<Guest>(guest, new HttpHeaders(), HttpStatus.OK);
     } else {
       return new ResponseEntity<Guest>(new HttpHeaders(), HttpStatus.OK);
     }
