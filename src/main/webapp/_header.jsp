@@ -6,7 +6,10 @@
 
   <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" />
   <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+  <link href="${contextPath}/resources/css/style.css" rel="stylesheet" />
+
 </head>
 
 <script src="${contextPath}/resources/js/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/js/popper.js"></script>
