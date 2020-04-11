@@ -342,23 +342,388 @@ CREATE OR REPLACE PROCEDURE create_employee (username varchar(255), PASSWORD VAR
   DECLARE
    _employee_id int;
    _user_id int;
+  BEGIN
+
+    SELECT nextval(''employee_sequence'') INTO _employee_id;
+    SELECT nextval(''user_sequence'') INTO _user_id;
+
+    INSERT INTO employee 
+  VALUES (_employee_id, first_name, last_name, email, assigned_position, phone, salary, branch_ID);
+
+    INSERT INTO users 
+  VALUES (_user_id, username, password, created_date);
+
+    INSERT INTO Employee_Address 
+  VALUES (_employee_id, street_number, street_name, city, province, country);
+
+    INSERT INTO users_role 
+  VALUES (_user_id, 1);
+
+  END;
+'
+  LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE create_property (host_ID int, branch_ID int, property_description varchar(255 ), property_type varchar, room_type varchar, available varchar, nightly_rate numeric(8, 2 ), cleaning_fee numeric(8, 2 ), bedrooms int, bathrooms int, max_guests int, street_number int, street_name varchar, city varchar, province varchar, country varchar
+ ) AS '
+  DECLARE
+   _property_id int;
 BEGIN
 
-  SELECT nextval(''employee_sequence'') INTO _employee_id;
-  SELECT nextval(''user_sequence'') INTO _user_id;
+  SELECT nextval(''property_sequence'') INTO _property_id;
 
-  INSERT INTO employee
-    VALUES (_employee_id, first_name, last_name, email, assigned_position, phone, salary, branch_ID);
+  INSERT INTO property
+  VALUES (property_ID,property_type,room_type,bedrooms,bathrooms,max_guests,
+					property_description,available,1.0,host_ID,branch_ID);
 
-  INSERT INTO users
-    VALUES (_user_id, username, password, created_date);
+  INSERT INTO property_address
+    VALUES (_property_ID, street_number,street_name,city,province,country);
 
-  INSERT INTO Employee_Address
-    VALUES (_employee_id, street_number, street_name, city, province, country);
-
-  INSERT INTO users_role
-    VALUES (_user_id, 1);
+  INSERT INTO pricing
+    VALUES (_property_ID,host_ID, nightly_rate,cleaning_fee);
 
 END;
 '
-  LANGUAGE plpgsql;
+      LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE create_guest (first_name varchar, last_name varchar, email varchar, phone varchar, branch_ID int, street_number int, street_name varchar, city varchar, province varchar, country varchar
+ ) AS '
+  DECLARE
+   _guest_id int;
+BEGIN
+
+  SELECT nextval(''guest_sequence'') INTO _guest_id;
+
+  INSERT INTO guest
+    VALUES(_guest_id,first_name,last_name, email, phone, branch_ID);
+
+  INSERT INTO guest_address
+    VALUES (_guest_id, street_number,street_name,city,province,country);
+END;
+'
+      LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE create_host (first_name varchar, last_name varchar, email varchar, phone varchar, branch_ID int, street_number int, street_name varchar, city varchar, province varchar, country varchar
+ ) AS '
+  DECLARE
+   _host_id int;
+BEGIN
+
+  SELECT nextval(''host_sequence'') INTO _host_id;
+
+  INSERT INTO guest
+    VALUES(_host_id,first_name,last_name, email, phone, branch_ID);
+
+  INSERT INTO guest_address
+    VALUES (_host_id, street_number,street_name,city,province,country);
+END;
+'
+      LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE edit_property (_property_ID int, _property_description varchar(255 ), _property_type varchar, _room_type varchar, _available varchar, _nightly_rate numeric(8, 2 ), _cleaning_fee numeric(8, 2 ), _bedrooms int, _bathrooms int, _max_guests int, _street_number int, _street_name varchar, _city varchar, _province varchar, _country varchar
+ ) AS '
+      BEGIN
+        UPDATE
+          property
+        SET
+          property_description = _property_description
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          property
+        SET
+          property_type = _property_type
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          property
+        SET
+          room_type = _room_type
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          property
+        SET
+          available = _available
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          pricing
+        SET
+          nightly_rate = _nightly_rate
+        WHERE
+          pricing.property_ID = _property_ID;
+        UPDATE
+          pricing
+        SET
+          cleaning_fee = _cleaning_fee
+        WHERE
+          pricing.property_ID = _property_ID;
+        UPDATE
+          property
+        SET
+          bedrooms = _bedrooms
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          property
+        SET
+          bathrooms = _bathrooms
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          property
+        SET
+          max_guests = _max_guests
+        WHERE
+          property.property_ID = _property_ID;
+        UPDATE
+          property_address
+        SET
+          street_number = _street_number
+        WHERE
+          property_address.property_ID = _property_ID;
+        UPDATE
+          property_address
+        SET
+          street_name = _street_name
+        WHERE
+          property_address.property_ID = _property_ID;
+        UPDATE
+          property_address
+        SET
+          city = _city
+        WHERE
+          property_address.property_ID = _property_ID;
+        UPDATE
+          property_address
+        SET
+          province = _province
+        WHERE
+          property_address.property_ID = _property_ID;
+        UPDATE
+          property_address
+        SET
+          country = _country
+        WHERE
+          property_address.property_ID = _property_ID;
+      END;
+    '
+    LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE edit_guest (_guest_ID int, _first_name varchar, _last_name varchar, _email varchar, _phone varchar, _branch_ID int, _street_number int, _street_name varchar, _city varchar, _province varchar, _country varchar
+ ) AS '
+      BEGIN
+        UPDATE
+          guest
+        SET
+          first_name = _first_name
+        WHERE
+          guest.guest_ID = _guest_ID;
+        UPDATE
+          guest
+        SET
+          last_name = _last_name
+        WHERE
+          guest.guest_ID = _guest_ID;
+        UPDATE
+          guest
+        SET
+          _email = email
+        WHERE
+          guest.guest_ID = _guest_ID;
+        UPDATE
+          guest
+        SET
+          phone = _phone
+        WHERE
+          guest.guest_ID = _guest_ID;
+        UPDATE
+          guest_address
+        SET
+          street_number = _street_number
+        WHERE
+          guest_address.guest_ID = _guest_ID;
+        UPDATE
+          guest_address
+        SET
+          street_number = _street_number
+        WHERE
+          guest_address.guest_ID = _guest_ID;
+        UPDATE
+          guest_address
+        SET
+          street_name = _street_name
+        WHERE
+          guest_address.guest_ID = _guest_ID;
+        UPDATE
+          guest_address
+        SET
+          city = _city
+        WHERE
+          guest_address.guest_ID = _guest_ID;
+        UPDATE
+          guest_address
+        SET
+          province = _province
+        WHERE
+          guest_address.guest_ID = _guest_ID;
+        UPDATE
+          guest_address
+        SET
+          country = _country
+        WHERE
+          guest_address.guest_ID = _guest_ID;
+      END;
+    '
+    LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE edit_host (_host_ID int, _first_name varchar, _last_name varchar, _email varchar, _phone varchar, _branch_ID int, _street_number int, _street_name varchar, _city varchar, _province varchar, _country varchar
+ ) AS '
+      BEGIN
+        UPDATE
+          host
+        SET
+          first_name = _first_name
+        WHERE
+          host.host_ID = _host_ID;
+        UPDATE
+          host
+        SET
+          last_name = _last_name
+        WHERE
+          host.host_ID = _host_ID;
+        UPDATE
+          host
+        SET
+          _email = email
+        WHERE
+          host.host_ID = _host_ID;
+        UPDATE
+          host
+        SET
+          phone = _phone
+        WHERE
+          host.host_ID = _host_ID;
+        UPDATE
+          host_address
+        SET
+          street_number = _street_number
+        WHERE
+          host_address.host_ID = _host_ID;
+        UPDATE
+          host_address
+        SET
+          street_number = _street_number
+        WHERE
+          host_address.host_ID = _host_ID;
+        UPDATE
+          host_address
+        SET
+          street_name = _street_name
+        WHERE
+          host_address.host_ID = _host_ID;
+        UPDATE
+          host_address
+        SET
+          city = _city
+        WHERE
+          host_address.host_ID = _host_ID;
+        UPDATE
+          host_address
+        SET
+          province = _province
+        WHERE
+          host_address.host_ID = _host_ID;
+        UPDATE
+          host_address
+        SET
+          country = _country
+        WHERE
+          host_address.host_ID = _host_ID;
+      END;
+    '
+    LANGUAGE plpgsql;
+    CREATE OR REPLACE PROCEDURE edit_employee (_username varchar(255 ), _PASSWORD varchar(255 ), _employee_ID int, _first_name varchar, _last_name varchar, _email varchar, _phone varchar, _assigned_position varchar, _salary numeric(8, 2 ), _branch_ID int, _street_number int, _street_name varchar, _city varchar, _province varchar, _country varchar
+ ) AS '
+      BEGIN
+        UPDATE
+          users
+        SET
+          username = _username
+        WHERE
+          users.employee_ID = _employee_ID;
+        UPDATE
+          users
+        SET
+          PASSWORD = _PASSWORD
+        WHERE
+          users.employee_ID = _employee_ID;
+        UPDATE
+          employee
+        SET
+          first_name = _first_name
+        WHERE
+          employee.employee_ID = _employee_ID;
+        UPDATE
+          employee
+        SET
+          last_name = _last_name
+        WHERE
+          employee.employee_ID = _employee_ID;
+        UPDATE
+          employee
+        SET
+          email = _email
+        WHERE
+          employee.employee_ID = _employee_ID;
+        UPDATE
+          employee
+        SET
+          phone = _phone
+        WHERE
+          employee.employee_ID = _employee_ID;
+        UPDATE
+          employee
+        SET
+          assigned_position = _assigned_position
+        WHERE
+          employee.employee_ID = _employee_ID;
+        UPDATE
+          employee
+        SET
+          salary = _salary
+        WHERE
+          employee.employee_ID = _employee_ID;
+        UPDATE
+          host_address
+        SET
+          street_number = _street_number
+        WHERE
+          employee_address.employee_ID = _employee_ID;
+        UPDATE
+          host_address
+        SET
+          street_number = _street_number
+        WHERE
+          employee_address.employee_ID = _employee_ID;
+        UPDATE
+          host_address
+        SET
+          street_name = _street_name
+        WHERE
+          employee_address.employee_ID = _employee_ID;
+        UPDATE
+          host_address
+        SET
+          city = _city
+        WHERE
+          employee_address.employee_ID = _employee_ID;
+        UPDATE
+          host_address
+        SET
+          province = _province
+        WHERE
+          employee_address.employee_ID = _employee_ID;
+        UPDATE
+          host_address
+        SET
+          country = _country
+        WHERE
+          employee_address.employee_ID = _employee_ID;
+      END;
+    '
+    LANGUAGE plpgsql;
