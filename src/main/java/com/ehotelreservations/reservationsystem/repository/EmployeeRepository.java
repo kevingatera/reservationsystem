@@ -18,14 +18,14 @@ public class EmployeeRepository {
 
   public Employee findByEmployeeId(Long id) {
 
-    String sql = "SELECT * FROM EMPLOYEE WHERE ID = ?";
+    String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM EMPLOYEE WHERE employee_ID = ?";
 
     return jdbcTemplate.queryForObject(sql, new Object[] { id }, new EmployeeRowMapper());
   }
 
   public List<Employee> findAll() {
 
-    String sql = "SELECT * FROM EMPLOYEE";
+    String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM EMPLOYEE";
 
     List<Employee> employees = jdbcTemplate.query(sql, new EmployeeRowMapper());
 
@@ -34,7 +34,7 @@ public class EmployeeRepository {
 
   public String findEmployeeNameById(Long id) {
 
-    String sql = "SELECT NAME FROM EMPLOYEE WHERE ID = ?";
+    String sql = "SELECT NAME FROM EMPLOYEE WHERE employee_ID = ?";
 
     return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
 

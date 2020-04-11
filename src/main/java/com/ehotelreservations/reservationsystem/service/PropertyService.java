@@ -6,6 +6,10 @@ import com.ehotelreservations.reservationsystem.model.Property;
 import com.ehotelreservations.reservationsystem.repository.PropertyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 // import org.slf4j.Logger;
@@ -55,12 +59,11 @@ public class PropertyService {
   // return pagedResult;
   // }
 
-  // public List<Property> getAllProperties(Integer pageNo, Integer pageSize,
-  // String sortBy) {
-  // Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+  public List<Property> getAllProperties(Integer pageNo, Integer pageSize, String sortBy) {
+    Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
-  // Page<Property> pagedResult = propertyRepository.findAll(paging);
-  // return pagedResult.getContent();
-  // }
+    Page<Property> pagedResult = propertyRepository.findAll(paging);
+    return pagedResult.getContent();
+  }
 
 }

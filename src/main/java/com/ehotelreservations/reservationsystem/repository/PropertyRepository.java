@@ -1,12 +1,17 @@
 package com.ehotelreservations.reservationsystem.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.mappers.NestedRowMapper;
+import com.ehotelreservations.reservationsystem.mappers.PropertyRowMapper;
 import com.ehotelreservations.reservationsystem.model.Property;
 
 @Repository
@@ -24,44 +29,66 @@ public class PropertyRepository {
     String sql = "insert into property(branch_id, email, first_name, last_name, phone, position, salary)"
         + "values(?,?,?,?,?,?,?)";
 
-    Object[] params = new Object[] { //
-        // property.getProperty_ID(), //
-        property.getBranchID(), //
-        property.getDescription(), //
-        property.getAvailable(), //
-        property.getBathrooms(), //
-        property.getHostID(), //
-        property.getRoomType(), //
-        property.getReviewAverage(), //
-        property.getType() //
-        // TODO:
-    };
+    // Object[] params = new Object[] { //
+    // // property.getProperty_ID(), //
+    // property.getBranchID(), //
+    // property.getDescription(), //
+    // property.getAvailable(), //
+    // property.getBathrooms(), //
+    // property.getHostID(), //
+    // property.getRoomType(), //
+    // property.getReviewAverage(), //
+    // property.getType() //
+    // // TODO:
+    // };
     // user.getName(), user.getPrice() };
 
-    jdbcTemplate.update(sql, params);
+    // jdbcTemplate.update(sql, params);
 
     return new Property();
   }
 
   public Property findById(int id) {
 
-    String sql = "SELECT * FROM GUEST WHERE ID = ?";
+    String sql = "SELECT * FROM PROPERTY WHERE property_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(Property.class));
+    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new PropertyRowMapper());
   }
 
   public List<Property> findAll() {
 
-    String sql = "SELECT * FROM GUEST";
+    String sql = "SELECT * FROM PROPERTY";
 
-    List<Property> propertys = jdbcTemplate.query(sql, new NestedRowMapper<>(Property.class));
+    List<Property> propertys = jdbcTemplate.query(sql, new PropertyRowMapper());
 
     return propertys;
   }
 
+  public Page<Property> findAll(Pageable pageable) {
+    int total = count();
+
+    String sql = "SELECT * " + "FROM Property";
+
+    Sort sort = pageable.getSort();
+    if (!sort.isEmpty()) {
+      sql += " ORDER BY ";
+      for (Sort.Order order : sort) {
+        sql += order.getProperty() + ",";
+      }
+      // remove the last comma
+      sql = sql.substring(0, sql.length() - 1);
+    }
+
+    sql += " LIMIT " + pageable.getPageSize() + " " + " OFFSET " + pageable.getOffset();
+
+    List<Property> list = jdbcTemplate.query(sql, new PropertyRowMapper());
+    return new PageImpl<>(list, pageable, total);
+
+  }
+
   public String findPropertyNameById(Long id) {
 
-    String sql = "SELECT NAME FROM GUEST WHERE ID = ?";
+    String sql = "SELECT NAME FROM PROPERTY WHERE property_ID = ?";
 
     return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
 
@@ -69,7 +96,7 @@ public class PropertyRepository {
 
   public int count() {
 
-    String sql = "SELECT COUNT(*) FROM GUEST";
+    String sql = "SELECT COUNT(*) FROM PROPERTY";
 
     // queryForInt() is Deprecated
     // https://www.mkyong.com/spring/jdbctemplate-queryforint-is-deprecated/

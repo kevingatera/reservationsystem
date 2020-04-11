@@ -18,14 +18,14 @@ public class GuestRepository {
 
   public Guest findById(int id) {
 
-    String sql = "SELECT * FROM GUEST WHERE ID = ?";
+    String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM GUEST WHERE guest_ID = ?";
 
     return jdbcTemplate.queryForObject(sql, new Object[] { id }, new GuestRowMapper());
   }
 
   public List<Guest> findAll() {
 
-    String sql = "SELECT * FROM GUEST";
+    String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM GUEST";
 
     List<Guest> guests = jdbcTemplate.query(sql, new GuestRowMapper());
 
@@ -34,7 +34,7 @@ public class GuestRepository {
 
   public String findGuestNameById(Long id) {
 
-    String sql = "SELECT NAME FROM GUEST WHERE ID = ?";
+    String sql = "SELECT NAME FROM GUEST WHERE guest_ID = ?";
 
     return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
 

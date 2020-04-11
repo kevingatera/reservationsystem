@@ -5,21 +5,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
 
-import com.ehotelreservations.reservationsystem.enums.RoleName;
-import com.ehotelreservations.reservationsystem.model.Role;
 import com.ehotelreservations.reservationsystem.model.User;
-import com.ehotelreservations.reservationsystem.repository.RoleRepository;
 import com.ehotelreservations.reservationsystem.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
+    // @Autowired
+    // private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -28,7 +23,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         // user.setRoles(new HashSet<>(roleRepository.findAll()));
         user.setCreatedDate(LocalDateTime.now());
-        user.setActive(true);
+        // user.setActive(true);
         // user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }

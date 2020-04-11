@@ -51,12 +51,12 @@ public class UserRepository {
     }
 
     public String findUserNameById(Long id) {
-        String sql = "SELECT * FROM USERS WHERE ID = ?";
+        String sql = "SELECT * FROM USERS WHERE user_ID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
     }
 
     public User findById(int id) {
-        String sql = "SELECT * FROM USERS WHERE ID = ?";
+        String sql = "SELECT * FROM USERS WHERE user_ID = ?";
         try {
             User user = jdbcTemplate.queryForObject(sql, new Object[] { id }, new UserRowMapper());
             return user;
