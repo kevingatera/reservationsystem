@@ -4,7 +4,6 @@ package com.ehotelreservations.reservationsystem.service;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.ehotelreservations.reservationsystem.enums.RoleName;
 import com.ehotelreservations.reservationsystem.model.Role;
@@ -23,14 +22,14 @@ public class RoleService {
   }
 
   public Role findByName(RoleName name) {
-    return roleRepository.findByName(name);
+    return roleRepository.findByName(name.name());
   }
 
   public boolean roleExists(RoleName name) {
     return roleRepository.existsRoleByName(name);
   }
 
-  public Optional<Role> findById(int id) {
+  public Role findById(int id) {
     return roleRepository.findById(id);
   }
 

@@ -40,6 +40,9 @@ build/
 # Log file
 *.log
 
+# Backup file
+*.bak*
+
 # BlueJ files
 *.ctxt
 

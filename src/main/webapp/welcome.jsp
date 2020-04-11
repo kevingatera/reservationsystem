@@ -20,7 +20,7 @@
           onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
 
     </c:if>
-    <c:else>
+    <%-- <c:else>
 
       <h2>Guests</h2>
 
@@ -31,7 +31,9 @@
 
       <a href="/host/login">Login</a>
       <a href="/host/registration">Login</a>
-    </c:else>
+    </c:else> 
+    --%>
+
   </div>
 </body>
 
