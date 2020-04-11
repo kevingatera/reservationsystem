@@ -65,7 +65,7 @@ session="false"%>
                     <div class="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ...
+                        More
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="editProperty/${property.propertyId}">Edit</a>
@@ -94,18 +94,6 @@ session="false"%>
       </div>
     </div>
 
-    <!-- <jsp:include page="../../_footer.jsp"></jsp:include> -->
-
-    <script>
-
-
-      $('#dataTable').DataTable();
-
-      $("#modalShowCar").on("show.bs.modal", function (e) {
-        var carid = $(e.relatedTarget).data("id");
-        // Do Whatever you like to do,
-      });
-    </script>
 </body>
 
 </html>

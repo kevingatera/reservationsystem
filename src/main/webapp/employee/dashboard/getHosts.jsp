@@ -45,11 +45,17 @@ session="false"%>
                   <td>${host.email}</td>
                   <td>${host.branchID}</td>
                   <td>${host.phone}</td>
-                  <td><button type="button" class="btn btn-primary">
-                      <a href="editEmployee/${employee.id}" style="color: white; text-decoration: none;">Edit</a>
-                    </button>${host.id}">
-                    Edit
-                    </button>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="editHost/${host.id}">Edit</a>
+                        <a class="dropdown-item" href="viewHost/${host.id}">View</a>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </c:forEach>
@@ -59,8 +65,6 @@ session="false"%>
         </div>
       </div>
     </div>
-
-    <jsp:include page="../../_footer.jsp"></jsp:include>
 
     <script>
       $("#modalShowCar").on("show.bs.modal", function (e) {

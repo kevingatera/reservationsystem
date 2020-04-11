@@ -51,7 +51,7 @@ session="false"%>
                     <div class="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ...
+                        More
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="editGuest/${guest.guestId}">Edit</a>
@@ -67,8 +67,6 @@ session="false"%>
         </div>
       </div>
     </div>
-
-    <jsp:include page="../../_footer.jsp"></jsp:include>
 
     <script>
       $("#modalShowCar").on("show.bs.modal", function (e) {
