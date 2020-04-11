@@ -16,7 +16,7 @@ public class User {
     // @Id
     // @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private Integer userID;
+    private int userID;
 
     // @Column(name = "username")
     @Length(min = 5, message = "*Your user name must have at least 5 characters")
