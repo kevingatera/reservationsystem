@@ -14,7 +14,8 @@ public class GuestRowMapper implements RowMapper<Guest> {
   public Guest mapRow(ResultSet rs, int rowNum) throws SQLException {
 
     Guest guest = new Guest();
-    guest.setId(rs.getInt("guest_ID"));
+    guest.setGuestId(rs.getInt("guest_ID"));
+    guest.setFullName(rs.getString("full_name"));
     guest.setFirstName(rs.getString("First_name"));
     guest.setLastName(rs.getString("Last_name"));
     guest.setEmail(rs.getString("email"));
