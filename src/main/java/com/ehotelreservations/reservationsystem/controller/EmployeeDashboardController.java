@@ -18,7 +18,8 @@ import com.ehotelreservations.reservationsystem.model.Guest;
 import com.ehotelreservations.reservationsystem.model.Host;
 import com.ehotelreservations.reservationsystem.model.Property;
 import com.ehotelreservations.reservationsystem.model.User;
-
+import com.ehotelreservations.reservationsystem.model.address.Property_Address;
+import com.ehotelreservations.reservationsystem.service.AddressService;
 import com.ehotelreservations.reservationsystem.service.EmployeeService;
 import com.ehotelreservations.reservationsystem.service.GuestService;
 import com.ehotelreservations.reservationsystem.service.HostService;
@@ -41,6 +42,9 @@ public class EmployeeDashboardController {
 
   @Autowired
   private PropertyService propertyService;
+
+  @Autowired
+  private AddressService addressService;
 
   // private static final Logger logger =
   // LoggerFactory.getLogger(UserController.class);
@@ -149,8 +153,10 @@ public class EmployeeDashboardController {
   @GetMapping("/viewProperty/{id}")
   public String viewProperty(@PathVariable("id") int id, Model model) {
     Property property = propertyService.getProperty(id);
+    Property_Address propertyAddress = addressService.findByPropertyId(id);
     model.addAttribute("viewProperty", property);
-    return currentPath + "addProperty";
+    model.addAttribute("viewPropertyAddress", propertyAddress);
+    return currentPath + "viewProperty";
   }
 
 }
