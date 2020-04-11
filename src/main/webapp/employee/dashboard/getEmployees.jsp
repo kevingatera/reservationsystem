@@ -67,8 +67,6 @@ session="false"%>
     <!-- Dark Overlay element -->
     <div class="overlay"></div>
 
-    <!-- <jsp:include page="../../_footer.jsp"></jsp:include> -->
-
     <script>
       // $("#modalShowCar").on("show.bs.modal", function (e) {
       //   var carid = $(e.relatedTarget).data("id");
