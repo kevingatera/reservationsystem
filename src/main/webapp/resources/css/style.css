@@ -60,10 +60,14 @@ a:focus {
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #6d7fcc;
+  background: #47748b;
 }
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
   background: #6d7fcc;
+}
+
+td {
+  white-space: nowrap;
 }
