@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class PropertyRepository {
 
     String sql = "SELECT * FROM PROPERTY WHERE property_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new PropertyRowMapper());
+    return jdbcTemplate.queryForObject(sql, new PropertyRowMapper(), id);
   }
 
   public List<Property> findAll() {
@@ -86,11 +87,11 @@ public class PropertyRepository {
 
   }
 
-  public String findPropertyNameById(Long id) {
+  public String findPropertyNameById(int id) {
 
     String sql = "SELECT NAME FROM PROPERTY WHERE property_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
+    return jdbcTemplate.queryForObject(sql, String.class);
 
   }
 
@@ -103,7 +104,6 @@ public class PropertyRepository {
     // int total = jdbcTemplate.queryForInt(sql);
 
     return jdbcTemplate.queryForObject(sql, Integer.class);
-
   }
 
   public List<Property> findByFirstName(String firstname) {

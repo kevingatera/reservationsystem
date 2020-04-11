@@ -40,13 +40,12 @@ public class RoleRepository {
     public Role findByName(String name) {
         String sql = "SELECT * FROM ROLE WHERE role_NAME = ?";
         try {
-            Role user = jdbcTemplate.queryForObject(sql, new Object[] { name }, new RoleRowMapper());
-            return user;
+            List<Role> list = jdbcTemplate.query(sql, new Object[] { name }, new RoleRowMapper());
+            return list.isEmpty() ? null : list.get(0);
 
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
-
     }
 
     public Role findById(int id) {
