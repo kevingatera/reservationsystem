@@ -8,6 +8,9 @@
   <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
   <link href="${contextPath}/resources/css/style.css" rel="stylesheet" />
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
 </head>
 
 <script src="${contextPath}/resources/js/jquery.min.js"></script>

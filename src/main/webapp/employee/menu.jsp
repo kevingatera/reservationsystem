@@ -24,6 +24,22 @@
             </div>
             <!-- <a class="nav-link" href="#" data-toggle="modal" data-target="#addEmployeeModal">Add Employee</a> -->
           </li>
+
+          <li class="nav-item">
+            <div class="dropdown show">
+              <a class="dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                List
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/employee/dashboard/addEmployee">Employee</a>
+                <a class="dropdown-item" href="/employee/dashboard/addHost">Host</a>
+                <a class="dropdown-item" href="/employee/dashboard/addGuest">Guest</a>
+              </div>
+            </div>
+            <!-- <a class="nav-link" href="#" data-toggle="modal" data-target="#addEmployeeModal">Add Employee</a> -->
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/employee/dashboard/getEmployees">Show Employees</a>
           </li>

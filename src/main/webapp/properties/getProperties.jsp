@@ -2,7 +2,7 @@
 session="false"%>
 <html>
 <jsp:include page="../../_header.jsp">
-  <jsp:param name="title" value="Show Guests" />
+  <jsp:param name="title" value="Show Properties" />
 </jsp:include>
 
 <body>
@@ -22,13 +22,12 @@ session="false"%>
         </div>
       </nav>
       <div class="container">
-        <h3>Here's a list of all Guests</h3>
+        <h3>Here's a list of all Properties</h3>
         <div class="row col-md-6">
           <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Full Name</th>
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col">Email</th>
@@ -38,26 +37,19 @@ session="false"%>
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="guest" items="${guestList}">
+              <c:forEach var="property" items="${propertyList}">
                 <tr>
-                  <th scope="row">${guest.guestId}</th>
-                  <td>${guest.fullName}</td>
-                  <td>${guest.firstName}</td>
-                  <td>${guest.lastName}</td>
-                  <td>${guest.email}</td>
-                  <td>${guest.branchID}</td>
-                  <td>${guest.phone}</td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ...
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="editGuest/${guest.guestId}">Edit</a>
-                        <a class="dropdown-item" href="viewGuest/${guest.guestId}">View</a>
-                      </div>
-                    </div>
+                  <th scope="row">${property.id}</th>
+                  <td>${property.firstName}</td>
+                  <td>${property.lastName}</td>
+                  <td>${property.email}</td>
+                  <td>${property.branchID}</td>
+                  <td>${property.phone}</td>
+                  <td><button type="button" class="btn btn-primary">
+                      <a href="editEmployee/${employee.id}" style="color: white; text-decoration: none;">Edit</a>
+                    </button>${property.id}">
+                    Edit
+                    </button>
                   </td>
                 </tr>
               </c:forEach>
