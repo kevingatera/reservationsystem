@@ -9,7 +9,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Guest extends User {
 
-	private int id;
+	private int guestId;
+
+	private String fullName;
 
 	private String firstName;
 
