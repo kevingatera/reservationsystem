@@ -9,7 +9,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Employee extends User {
 
-    private Integer id;
+    private Integer employeeId;
+
+    private String fullName;
 
     private String firstName;
 
