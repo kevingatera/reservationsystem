@@ -341,23 +341,21 @@ CREATE OR REPLACE PROCEDURE create_employee (username varchar(255), PASSWORD VAR
   AS '
   DECLARE
    _employee_id int;
-   _user_id int;
   BEGIN
 
     SELECT nextval(''employee_sequence'') INTO _employee_id;
-    SELECT nextval(''user_sequence'') INTO _user_id;
 
     INSERT INTO employee 
   VALUES (_employee_id, first_name, last_name, email, assigned_position, phone, salary, branch_ID);
 
-    INSERT INTO users 
-  VALUES (_user_id, username, password, created_date);
-
     INSERT INTO Employee_Address 
   VALUES (_employee_id, street_number, street_name, city, province, country);
 
+    INSERT INTO users 
+  VALUES (_employee_id, username, password, created_date);
+
     INSERT INTO users_role 
-  VALUES (_user_id, 1);
+  VALUES (_employee_id, 1);
 
   END;
 '
@@ -393,6 +391,12 @@ BEGIN
 
   INSERT INTO guest
     VALUES(_guest_id,first_name,last_name, email, phone, branch_ID);
+  
+  INSERT INTO users 
+    VALUES (_guest_id, username, password, created_date);
+
+  INSERT INTO users_role 
+    VALUES (_guest_id, 2);
 
   INSERT INTO guest_address
     VALUES (_guest_id, street_number,street_name,city,province,country);
@@ -410,7 +414,13 @@ BEGIN
   INSERT INTO guest
     VALUES(_host_id,first_name,last_name, email, phone, branch_ID);
 
-  INSERT INTO guest_address
+  INSERT INTO users 
+    VALUES (_host_id, username, password, created_date);
+
+  INSERT INTO users_role 
+    VALUES (_host_id, 1);
+
+  INSERT INTO host_address
     VALUES (_host_id, street_number,street_name,city,province,country);
 END;
 '
