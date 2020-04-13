@@ -10,17 +10,9 @@ session="false"%>
 
     <jsp:include page="../sidebar.jsp" />
     <!-- Page Content -->
-    <div id="content">
+    <div class="content">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
 
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-            <span>Toggle Sidebar</span>
-          </button>
-        </div>
-      </nav>
 
       <div class="container">
         <div class="row">
@@ -91,68 +83,6 @@ session="false"%>
                   </div>
                 </div>
               </div>
-
-
-              <!-- <div class="card property-features-add">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Center Cooling</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Fire Alarm</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Heating</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Gym</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Balcony</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Modern Kitchen</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Pool</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Elevator</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Dryer</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Sauna</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Dish Washer</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Pet Frindly</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
 
               <div class="card">
                 <div class="card-body">

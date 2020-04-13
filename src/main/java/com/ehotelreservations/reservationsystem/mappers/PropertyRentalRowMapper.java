@@ -14,6 +14,7 @@ public class PropertyRentalRowMapper implements RowMapper<PropertyRental> {
   public PropertyRental mapRow(ResultSet rs, int rowNum) throws SQLException {
 
     PropertyRental property = new PropertyRental();
+
     property.setProperty(new PropertyRowMapper().mapRow(rs, rowNum));
     property.setAddress((Property_Address) new AddressRowMapper().mapRow(rs, rowNum));
     property.setPrice(new PriceRowMapper().mapRow(rs, rowNum));

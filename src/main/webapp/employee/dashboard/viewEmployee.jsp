@@ -17,7 +17,7 @@ session="false"%>
       <div class="container bootstrap snippet">
         <div class="row">
           <div class="col-sm-10">
-            <h1>${viewGuest.fullName}</h1>
+            <h1>${viewEmployee.fullName}</h1>
           </div>
         </div>
         <div class="row">
@@ -34,14 +34,12 @@ session="false"%>
 
             </hr><br>
 
-            <ul class="list-group">
+            <!-- <ul class="list-group">
               <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
               <li class="list-group-item text-right"><span class="pull-left"><strong>Rental Agreements</strong></span>
                 125</li>
-              <!-- <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li> -->
-            </ul>
+               <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+            </ul> -->
 
           </div>
           <!--/col-3-->
@@ -70,7 +68,7 @@ session="false"%>
                         <h6>First name</h6>
                       </label>
                       <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name"
-                        title="enter your first name if any." value="${viewGuest.firstName}">
+                        title="enter your first name if any." value="${viewEmployee.firstName}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -80,7 +78,7 @@ session="false"%>
                         <h6>Last name</h6>
                       </label>
                       <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name"
-                        title="enter your last name if any." value="${viewGuest.lastName}">
+                        title="enter your last name if any." value="${viewEmployee.lastName}">
                     </div>
                   </div>
 
@@ -102,7 +100,7 @@ session="false"%>
                       </label>
                       <input type="text" class="form-control" name="mobile" id="mobile"
                         placeholder="enter mobile number" title="enter your mobile number if any."
-                        value="${viewGuest.phone}">
+                        value="${viewEmployee.phone}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -112,7 +110,7 @@ session="false"%>
                         <h6>Email</h6>
                       </label>
                       <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
-                        title="enter your email." value="${viewGuest.email}">
+                        title="enter your email." value="${viewEmployee.email}">
                     </div>
                   </div>
 
@@ -137,26 +135,27 @@ session="false"%>
                   <div class="form-group col-md-4">
                     <label>Street Number <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" placeholder="Enter Street Number"
-                      value="${viewGuestAddress.streetNumber}">
+                      value="${viewEmployeeAddress.streetNumber}">
                   </div>
                   <div class=" form-group col-md-4">
                     <label>Street Name <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Enter Street Name"
-                      value="${viewGuestAddress.streetName}">
+                      value="${viewEmployeeAddress.streetName}">
                   </div>
                   <div class="form-group col-md-4">
                     <label>Country<span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Enter Country"
-                      value="${viewGuestAddress.country}">
+                      value="${viewEmployeeAddress.country}">
                   </div>
                   <div class="form-group col-md-4">
                     <label>City <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="Enter City" value="${viewGuestAddress.city}">
+                    <input type="text" class="form-control" placeholder="Enter City"
+                      value="${viewEmployeeAddress.city}">
                   </div>
                   <div class="form-group col-md-4">
                     <label>State/Province <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Enter State/Province"
-                      value="${viewGuestAddress.province}">
+                      value="${viewEmployeeAddress.province}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -181,7 +180,7 @@ session="false"%>
                       <h6>Username</h6>
                     </label>
                     <input type="email" class="form-control" id="location" placeholder="enter a username"
-                      title="enter a username" value="${viewGuestUser.username}">
+                      title="enter a username" value="${viewEmployeeUser.username}">
                   </div>
                 </div>
                 <div class="form-group">

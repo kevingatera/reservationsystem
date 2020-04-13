@@ -11,22 +11,23 @@ session="false"%>
 
     <jsp:include page="../sidebar.jsp" />
     <!-- Page Content -->
-    <div id="content">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-right"></i>
-            <span>Toggle Sidebar</span>
-          </button>
-        </div>
-      </nav>
+    <div class="content mt-4">
 
       <div class="container">
-        <h3>Here's a list of all Employees</h3>
+
+        <div class="titleContainer">
+          <div class="float-left">
+            <h3>Here's a list of all Employees</h3>
+          </div>
+          <div class="float-right">
+            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i><a href="addEmployee"> Add
+                new</a></button>
+          </div>
+        </div>
+
+        <hr>
         <div class="row col-md-6">
-          <table class="table table-striped">
+          <table class="datatable table table-striped">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -43,7 +44,7 @@ session="false"%>
             <tbody>
               <c:forEach var="employee" items="${employeeList}">
                 <tr>
-                  <th scope="row">${employee.id}</th>
+                  <th scope="row">${employee.employeeId}</th>
                   <td>${employee.firstName}</td>
                   <td>${employee.lastName}</td>
                   <td>${employee.email}</td>
@@ -53,7 +54,8 @@ session="false"%>
                   <td>${employee.phone}</td>
                   <td>
                     <button type="button" class="btn btn-primary">
-                      <a href="editEmployee/${employee.id}" style="color: white; text-decoration: none;">Edit</a>
+                      <a href="viewEmployee/${employee.employeeId}"
+                        style="color: white; text-decoration: none;">View</a>
                     </button>
                   </td>
                 </tr>
@@ -72,6 +74,24 @@ session="false"%>
       //   var carid = $(e.relatedTarget).data("id");
       //   // Do Whatever you like to do,
       // });
+
+      var dtable = $(".datatable").dataTable().api();
+
+      // Grab the datatables input box and alter how it is bound to events
+      $(".dataTables_filter input")
+        .unbind() // Unbind previous default bindings
+        .bind("input", function (e) { // Bind our desired behavior
+          // If the length is 3 or more characters, or the user pressed ENTER, search
+          if (this.value.length >= 3 || e.keyCode == 13) {
+            // Call the API search function
+            dtable.search(this.value).draw();
+          }
+          // Ensure we clear the search if they backspace far enough
+          if (this.value == "") {
+            dtable.search("").draw();
+          }
+          return;
+        });
     </script>
 </body>
 

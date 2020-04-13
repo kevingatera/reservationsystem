@@ -10,21 +10,23 @@ session="false"%>
 
     <jsp:include page="../sidebar.jsp" />
     <!-- Page Content -->
-    <div id="content">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-            <span>Toggle Sidebar</span>
-          </button>
-        </div>
-      </nav>
+    <div class="content mt-4">
 
       <div class="container">
+
+        <div class="titleContainer">
+          <div class="float-left">
+            <h3>Add new Property</h3>
+          </div>
+          <div class="float-right">
+            <button class="btn"><i class="fa fa-redo"></i><a href="addHost"> Reset</a></button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i><a href="addHost"> Save</a></button>
+          </div>
+        </div>
+
+        <hr>
         <div class="row">
-          <div class="col-lg-8 col-md-8 mx-auto">
+          <div class="col-lg-10 col-md-8">
             <form>
               <div class="card">
                 <div class="card-body">
@@ -86,68 +88,6 @@ session="false"%>
                 </div>
               </div>
 
-
-              <div class="card property-features-add">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Center Cooling</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Fire Alarm</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Heating</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Gym</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Balcony</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Modern Kitchen</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Pool</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Elevator</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Dryer</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Sauna</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Dish Washer</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="osahan-checkbox">
-                        <label class="custom-control-label" for="osahan-checkbox">Pet Frindly</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -185,14 +125,9 @@ session="false"%>
                       <input type="text" class="form-control" placeholder="...">
                     </div>
                   </div>
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13696.514136891485!2d75.82879273227792!3d30.88306512076876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a825231282e55%3A0xf628112220a2ecda!2sLudhiana%2C+Model+Town%2C+Ludhiana%2C+Punjab!5e0!3m2!1sen!2sin!4v1521540943434"
-                    width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
                 </div>
               </div>
-
-
-              <button type="submit" class="btn btn-success">ADD PROPERTY</button>
 
             </form>
           </div>

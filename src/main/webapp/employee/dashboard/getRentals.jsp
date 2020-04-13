@@ -2,7 +2,7 @@
 session="false"%>
 <html>
 <jsp:include page="../../_header.jsp">
-  <jsp:param name="title" value="Show Guests" />
+  <jsp:param name="title" value="Show Rentals" />
 </jsp:include>
 
 <body>
@@ -14,42 +14,30 @@ session="false"%>
     <div class="content mt-4">
 
       <div class="container">
-
-        <div class="titleContainer">
-          <div class="float-left">
-            <h3>Here's a list of all Guests</h3>
-          </div>
-          <div class="float-right">
-            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i><a href="addGuest"> Add
-                new</a></button>
-          </div>
-        </div>
-
+        <h3>Here's a list of all Rentals</h3>
         <hr>
         <div class="row col-md-6">
           <table class="datatable table table-striped">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Email</th>
-                <th scope="col">Branch</th>
-                <th scope="col">Phone</th>
+                <th scope="col">Property ID</th>
+                <th scope="col">Guest ID</th>
+                <th scope="col">Booking Reference</th>
+                <th scope="col">Agreement Start</th>
+                <th scope="col">Agreement End</th>
+                <th scope="col">Agreement Date</th>
                 <th scope="col">Options</th>
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="guest" items="${guestList}">
+              <c:forEach var="rental" items="${rentalList}">
                 <tr>
-                  <th scope="row">${guest.guestId}</th>
-                  <td>${guest.fullName}</td>
-                  <td>${guest.firstName}</td>
-                  <td>${guest.lastName}</td>
-                  <td>${guest.email}</td>
-                  <td>${guest.branchID}</td>
-                  <td>${guest.phone}</td>
+                  <th scope="row">${rental.propertyID}</th>
+                  <td>${rental.guestID}</td>
+                  <td>${rental.bookingReference}</td>
+                  <td>${rental.agreementStart}</td>
+                  <td>${rental.agreementEnd}</td>
+                  <td>${rental.agreementSigning}</td>
                   <td>
                     <div class="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -57,9 +45,9 @@ session="false"%>
                         More
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="editGuest/${guest.guestId}">Edit</a>
-                        <a class="dropdown-item" href="viewGuest/${guest.guestId}">View</a>
-                        <a class="dropdown-item text-danger" href="viewGuest/${guest.guestId}">Delete</a>
+                        <a class="dropdown-item" href="editGuest/${rental.propertyID}">Edit</a>
+                        <a class="dropdown-item" href="viewGuest/${rental.propertyID}">View</a>
+                        <a class="dropdown-item text-danger" href="viewGuest/${rental.propertyID}">Delete</a>
                       </div>
                     </div>
                   </td>
