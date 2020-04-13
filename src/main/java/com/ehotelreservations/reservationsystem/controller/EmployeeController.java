@@ -14,8 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ehotelreservations.reservationsystem.model.Employee;
-import com.ehotelreservations.reservationsystem.model.User;
-import com.ehotelreservations.reservationsystem.model.address.Employee_Address;
 import com.ehotelreservations.reservationsystem.service.EmployeeService;
 import com.ehotelreservations.reservationsystem.service.SecurityService;
 import com.ehotelreservations.reservationsystem.validator.UserValidator;
