@@ -9,6 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Employee_Address extends Address {
 
-  String employeeID;
+  int employeeID;
 
 }

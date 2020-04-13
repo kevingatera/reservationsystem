@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import com.ehotelreservations.reservationsystem.mappers.NestedRowMapper;
+import com.ehotelreservations.reservationsystem.mappers.PropertyRentalRowMapper;
 import com.ehotelreservations.reservationsystem.mappers.PropertyRowMapper;
 import com.ehotelreservations.reservationsystem.model.Property;
+import com.ehotelreservations.reservationsystem.model.PropertyRental;
 
 @Repository
 public class PropertyRepository {
@@ -52,7 +53,7 @@ public class PropertyRepository {
 
     String sql = "SELECT * FROM PROPERTY WHERE property_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new PropertyRowMapper());
+    return jdbcTemplate.queryForObject(sql, new PropertyRowMapper(), id);
   }
 
   public List<Property> findAll() {
@@ -62,6 +63,21 @@ public class PropertyRepository {
     List<Property> propertys = jdbcTemplate.query(sql, new PropertyRowMapper());
 
     return propertys;
+  }
+
+  public List<PropertyRental> findAllPropertyRentals() {
+
+    String sql = "WITH min_rental(property_ID,guest_ID,host_ID,booking_reference,branch_ID,nightly_rate,agreement_start, agreement_end, agreement_signing,payment_status) AS("
+        + " SELECT pa.property_ID as property_ID,pa.guest_ID as guest_ID,pa.host_ID as host_ID,pa.booking_reference as booking_reference,p.branch_ID as branch_ID,nightly_rate, agreement_start, agreement_end, agreement_signing, payment_status"
+        + " FROM payment pa" + " Inner join rental_agreement ra"
+        + " ON pa.property_ID=ra.property_ID and pa.guest_ID=ra.guest_ID and pa.booking_reference=ra.booking_reference"
+        + " Inner join property p" + " ON pa.property_ID=p.property_ID" + " Inner join pricing pr"
+        + " ON pa.property_ID=pr.property_ID and pa.host_ID=pr.host_ID)" + " SELECT * FROM min_rental mr"
+        + " where mr.payment_status='Completed'" + " And nightly_rate=(Select min(nightly_rate) From min_rental);";
+
+    List<PropertyRental> propertyRentals = jdbcTemplate.query(sql, new PropertyRentalRowMapper());
+
+    return propertyRentals;
   }
 
   public Page<Property> findAll(Pageable pageable) {
@@ -86,11 +102,11 @@ public class PropertyRepository {
 
   }
 
-  public String findPropertyNameById(Long id) {
+  public String findPropertyNameById(int id) {
 
     String sql = "SELECT NAME FROM PROPERTY WHERE property_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
+    return jdbcTemplate.queryForObject(sql, String.class);
 
   }
 
@@ -103,7 +119,6 @@ public class PropertyRepository {
     // int total = jdbcTemplate.queryForInt(sql);
 
     return jdbcTemplate.queryForObject(sql, Integer.class);
-
   }
 
   public List<Property> findByFirstName(String firstname) {

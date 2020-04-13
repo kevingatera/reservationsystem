@@ -3,6 +3,7 @@ package com.ehotelreservations.reservationsystem.service;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.model.Property;
+import com.ehotelreservations.reservationsystem.model.PropertyRental;
 import com.ehotelreservations.reservationsystem.repository.PropertyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,10 @@ public class PropertyService {
 
   public List<Property> getAllProperties() {
     return propertyRepository.findAll();
+  }
+
+  public List<PropertyRental> getAllPropertyRentals() {
+    return propertyRepository.findAllPropertyRentals();
   }
 
   // http://goo.gl/7fxvVf

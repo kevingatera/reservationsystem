@@ -9,6 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Host_Address extends Address {
 
-  String hostID;
+  int hostID;
 
 }

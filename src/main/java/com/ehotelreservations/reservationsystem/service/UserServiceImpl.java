@@ -32,4 +32,14 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public int getBranchCount() {
+        return userRepository.count();
+    }
 }

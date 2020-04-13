@@ -57,13 +57,29 @@ a:focus {
   background: #fff;
 }
 
-#sidebar ul li.active > a,
-a[aria-expanded="true"] {
+/* a[aria-expanded="true"] */
+#sidebar ul li.active > a {
   color: #fff;
-  background: #6d7fcc;
+  background: #47748b;
 }
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
   background: #6d7fcc;
+}
+
+td {
+  white-space: nowrap;
+}
+
+.titleContainer {
+  min-width: 50%;
+  display: inline-table;
+}
+
+.my-card {
+  position: absolute;
+  left: 40%;
+  top: -20px;
+  border-radius: 50%;
 }

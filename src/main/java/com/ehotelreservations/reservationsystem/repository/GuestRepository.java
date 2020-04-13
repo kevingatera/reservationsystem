@@ -2,12 +2,14 @@ package com.ehotelreservations.reservationsystem.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.mappers.GuestRowMapper;
-import com.ehotelreservations.reservationsystem.mappers.NestedRowMapper;
 import com.ehotelreservations.reservationsystem.model.Guest;
 
 @Repository
@@ -20,7 +22,8 @@ public class GuestRepository {
 
     String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM GUEST WHERE guest_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new GuestRowMapper());
+    return jdbcTemplate.queryForObject(sql, new GuestRowMapper(), id);
+
   }
 
   public List<Guest> findAll() {
@@ -32,12 +35,11 @@ public class GuestRepository {
     return guests;
   }
 
-  public String findGuestNameById(Long id) {
+  public String findGuestNameById(int id) {
 
     String sql = "SELECT NAME FROM GUEST WHERE guest_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
-
+    return jdbcTemplate.queryForObject(sql, String.class, id);
   }
 
   public int count() {
@@ -73,17 +75,16 @@ public class GuestRepository {
     String sql = "insert into guest(branch_id, email, first_name, last_name, phone, position, salary)"
         + "values(?,?,?,?,?,?,?)";
 
-    Object[] params = new Object[] { //
-        // guest.getGuest_ID(), //
-        guest.getBranchID(), //
-        guest.getEmail(), //
-        guest.getFirstName(), //
-        guest.getLastName(), //
-        guest.getPhone(), //
-        // TODO:
-    };
-    // user.getName(), user.getPrice() };
-
-    jdbcTemplate.update(sql, params);
+    jdbcTemplate.update(sql, new PreparedStatementSetter() {
+      @Override
+      public void setValues(PreparedStatement ps) throws SQLException {
+        ps.setInt(1, guest.getBranchID());
+        ps.setString(1, guest.getEmail());
+        ps.setString(1, guest.getFirstName());
+        ps.setString(1, guest.getLastName());
+        ps.setString(1, guest.getPhone());
+      }
+    });
   }
+
 }

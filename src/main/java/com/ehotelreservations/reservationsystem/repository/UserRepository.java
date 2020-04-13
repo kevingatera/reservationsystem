@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ import com.ehotelreservations.reservationsystem.model.User;
 @Repository
 public class UserRepository {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(UserRepository.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(UserRepository.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -41,8 +42,10 @@ public class UserRepository {
     public User findByUsername(String username) {
         String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
         try {
-            User user = jdbcTemplate.queryForObject(sql, new Object[] { username }, new UserRowMapper());
-            return user;
+            List<User> list = jdbcTemplate.query(sql, (PreparedStatementSetter) ps -> ps.setString(1, username),
+                    new UserRowMapper());
+
+            return list.isEmpty() ? null : list.get(0);
 
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -50,15 +53,19 @@ public class UserRepository {
 
     }
 
-    public String findUserNameById(Long id) {
+    public String findUserNameById(int id) {
         String sql = "SELECT * FROM USERS WHERE user_ID = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
+
+        return jdbcTemplate.queryForObject(sql, String.class);
     }
 
     public User findById(int id) {
         String sql = "SELECT * FROM USERS WHERE user_ID = ?";
         try {
-            User user = jdbcTemplate.queryForObject(sql, new Object[] { id }, new UserRowMapper());
+            List<User> list = jdbcTemplate.query(sql, (PreparedStatementSetter) ps -> ps.setInt(1, id),
+                    new UserRowMapper());
+
+            User user = list.isEmpty() ? null : list.get(0);
             return user;
 
         } catch (EmptyResultDataAccessException e) {
@@ -78,7 +85,7 @@ public class UserRepository {
     public User findByRoleId(int id) {
         String sql = "SELECT role_ID FROM users_role WHERE user_ID = ?";
         try {
-            int userID = jdbcTemplate.queryForObject(sql, new Object[] { id }, Integer.class);
+            int userID = jdbcTemplate.queryForObject(sql, Integer.class);
             User user = findById(userID);
             return user;
 

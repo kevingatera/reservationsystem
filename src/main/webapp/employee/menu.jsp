@@ -6,47 +6,37 @@
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     </form>
 
-    <div class="">
-      <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">
-        <!-- Links -->
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <div class="dropdown show">
-              <a class="dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                Add new
+                Dropdown link
               </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="/employee/dashboard/addEmployee">Employee</a>
-                <a class="dropdown-item" href="/employee/dashboard/addHost">Host</a>
-                <a class="dropdown-item" href="/employee/dashboard/addGuest">Guest</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
               </div>
-            </div>
-            <!-- <a class="nav-link" href="#" data-toggle="modal" data-target="#addEmployeeModal">Add Employee</a> -->
-          </li>
-
-          <li class="nav-item">
-            <div class="dropdown show">
-              <a class="dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                List
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="/employee/dashboard/addEmployee">Employee</a>
-                <a class="dropdown-item" href="/employee/dashboard/addHost">Host</a>
-                <a class="dropdown-item" href="/employee/dashboard/addGuest">Guest</a>
-              </div>
-            </div>
-            <!-- <a class="nav-link" href="#" data-toggle="modal" data-target="#addEmployeeModal">Add Employee</a> -->
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/employee/dashboard/getEmployees">Show Employees</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="document.forms['logoutForm'].submit()">Logout</a>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
   </c:if>

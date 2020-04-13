@@ -30,11 +30,10 @@
 					</div>
 				</spring:bind>
 
-				<spring:bind path="phoneNumber">
+				<spring:bind path="phone">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<form:input type="text" path="phoneNumber" class="form-control" placeholder="Phone Number"
-							autofocus="true" />
-						<form:errors path="phoneNumber"></form:errors>
+						<form:input type="text" path="phone" class="form-control" placeholder="Phone Number" autofocus="true" />
+						<form:errors path="phone"></form:errors>
 					</div>
 				</spring:bind>
 

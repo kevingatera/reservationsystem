@@ -2,12 +2,14 @@ package com.ehotelreservations.reservationsystem.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.mappers.HostRowMapper;
-import com.ehotelreservations.reservationsystem.mappers.NestedRowMapper;
 import com.ehotelreservations.reservationsystem.model.Host;
 
 @Repository
@@ -16,51 +18,48 @@ public class HostRepository {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  public void save(Host guest) {
-    // CALL create_guest ('admin002',
+  public void save(Host host) {
+    // CALL create_host ('admin002',
     // '$2a$10$xC5u5L5sDX1SccqlcPj8iOOMXrlE3qpWY9yJjL0.RrhQf3gCSvKmW', '2020-04-05
     // 10:50:32.653', 'Kevin', 'Gatera', 'kevingatera@gmail.com', '6135017089',
     // 'Supervisor', 16000, 100, 402, 'Montfort', 'Ottawa', 'Ontario', 'Canada');
 
-    String sql = "insert into guest(branch_id, email, first_name, last_name, phone, position, salary)"
-        + "values(?,?,?,?,?,?,?)";
+    String sql = "insert into host(branch_id, email, first_name, last_name, phone,)" + "values(?,?,?,?,?)";
 
-    Object[] params = new Object[] { //
-        // guest.getHost_ID(), //
-        guest.getBranchID(), //
-        guest.getEmail(), //
-        guest.getFirstName(), //
-        guest.getLastName(), //
-        guest.getPhone() //
-        // TODO:
-    };
-    // user.getName(), user.getPrice() };
-
-    jdbcTemplate.update(sql, params);
+    jdbcTemplate.update(sql, new PreparedStatementSetter() {
+      @Override
+      public void setValues(PreparedStatement ps) throws SQLException {
+        ps.setInt(1, host.getBranchID());
+        ps.setString(1, host.getEmail());
+        ps.setString(1, host.getFirstName());
+        ps.setString(1, host.getLastName());
+        ps.setString(1, host.getPhone());
+      }
+    });
   }
 
   public Host findById(int id) {
 
     String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM HOST WHERE host_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new HostRowMapper());
+    List<Host> list = jdbcTemplate.query(sql, (PreparedStatementSetter) ps -> ps.setInt(1, id), new HostRowMapper());
+    return list.isEmpty() ? null : list.get(0);
   }
 
   public List<Host> findAll() {
 
     String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM HOST";
 
-    List<Host> guests = jdbcTemplate.query(sql, new HostRowMapper());
+    List<Host> hosts = jdbcTemplate.query(sql, new HostRowMapper());
 
-    return guests;
+    return hosts;
   }
 
-  public String findHostNameById(Long id) {
+  public String findHostNameById(int id) {
 
     String sql = "SELECT NAME FROM HOST WHERE host_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
-
+    return jdbcTemplate.queryForObject(sql, String.class);
   }
 
   public int count() {
@@ -72,7 +71,6 @@ public class HostRepository {
     // int total = jdbcTemplate.queryForInt(sql);
 
     return jdbcTemplate.queryForObject(sql, Integer.class);
-
   }
 
   public List<Host> findByFirstName(String firstname) {

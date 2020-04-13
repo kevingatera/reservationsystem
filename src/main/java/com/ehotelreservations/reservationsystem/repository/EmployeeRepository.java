@@ -2,12 +2,14 @@ package com.ehotelreservations.reservationsystem.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.mappers.EmployeeRowMapper;
-import com.ehotelreservations.reservationsystem.mappers.NestedRowMapper;
 import com.ehotelreservations.reservationsystem.model.Employee;
 
 @Repository
@@ -16,11 +18,13 @@ public class EmployeeRepository {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  public Employee findByEmployeeId(Long id) {
+  public Employee findById(int id) {
 
     String sql = "SELECT concat(first_name,' ',last_name) as full_name, * FROM EMPLOYEE WHERE employee_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new EmployeeRowMapper());
+    List<Employee> list = jdbcTemplate.query(sql, (PreparedStatementSetter) ps -> ps.setInt(1, id),
+        new EmployeeRowMapper());
+    return list.isEmpty() ? null : list.get(0);
   }
 
   public List<Employee> findAll() {
@@ -32,11 +36,11 @@ public class EmployeeRepository {
     return employees;
   }
 
-  public String findEmployeeNameById(Long id) {
+  public String findEmployeeNameById(int id) {
 
     String sql = "SELECT NAME FROM EMPLOYEE WHERE employee_ID = ?";
 
-    return jdbcTemplate.queryForObject(sql, new Object[] { id }, new NestedRowMapper<>(String.class));
+    return jdbcTemplate.queryForObject(sql, String.class, id);
 
   }
 
@@ -56,10 +60,6 @@ public class EmployeeRepository {
     return null;
   }
 
-  public Employee findById(long id) {
-    return null;
-  }
-
   public void save(Employee employee) {
     // CALL create_employee ('admin002',
     // '$2a$10$xC5u5L5sDX1SccqlcPj8iOOMXrlE3qpWY9yJjL0.RrhQf3gCSvKmW', '2020-04-05
@@ -69,20 +69,18 @@ public class EmployeeRepository {
     String sql = "insert into employee(branch_id, email, first_name, last_name, phone, position, salary)"
         + "values(?,?,?,?,?,?,?)";
 
-    Object[] params = new Object[] { //
-        // employee.getEmployee_ID(), //
-        employee.getBranch_ID(), //
-        employee.getEmail(), //
-        employee.getFirstName(), //
-        employee.getLastName(), //
-        employee.getPhone(), //
-        employee.getPosition(), //
-        employee.getSalary()
-        // TODO:
-    };
-    // user.getName(), user.getPrice() };
-
-    jdbcTemplate.update(sql, params);
+    jdbcTemplate.update(sql, new PreparedStatementSetter() {
+      @Override
+      public void setValues(PreparedStatement ps) throws SQLException {
+        ps.setInt(1, employee.getBranch_ID());
+        ps.setString(2, employee.getEmail());
+        ps.setString(3, employee.getFirstName());
+        ps.setString(4, employee.getLastName());
+        ps.setString(5, employee.getPhone());
+        ps.setString(6, employee.getPosition());
+        ps.setFloat(7, employee.getSalary());
+      }
+    });
   }
 
   public List<Employee> findByLastName(String lastname) {

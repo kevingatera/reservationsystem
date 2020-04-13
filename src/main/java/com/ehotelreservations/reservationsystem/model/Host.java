@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Host extends User {
 
-	private int id;
+	private int hostId;
 
 	private String fullName;
 

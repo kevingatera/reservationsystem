@@ -6,25 +6,28 @@ session="false"%>
 </jsp:include>
 
 <body>
+
   <div class="wrapper">
 
     <jsp:include page="../sidebar.jsp" />
     <!-- Page Content -->
-    <div id="content">
+    <div class="content mt-4">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-            <span>Toggle Sidebar</span>
-          </button>
-        </div>
-      </nav>
       <div class="container">
-        <h3>Here's a list of all Guests</h3>
+
+        <div class="titleContainer">
+          <div class="float-left">
+            <h3>Here's a list of all Guests</h3>
+          </div>
+          <div class="float-right">
+            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i><a href="addGuest"> Add
+                new</a></button>
+          </div>
+        </div>
+
+        <hr>
         <div class="row col-md-6">
-          <table class="table table-striped">
+          <table class="datatable table table-striped">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -51,11 +54,12 @@ session="false"%>
                     <div class="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ...
+                        More
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="editGuest/${guest.guestId}">Edit</a>
                         <a class="dropdown-item" href="viewGuest/${guest.guestId}">View</a>
+                        <a class="dropdown-item text-danger" href="viewGuest/${guest.guestId}">Delete</a>
                       </div>
                     </div>
                   </td>
@@ -68,14 +72,29 @@ session="false"%>
       </div>
     </div>
 
-    <jsp:include page="../../_footer.jsp"></jsp:include>
+  </div>
 
-    <script>
-      $("#modalShowCar").on("show.bs.modal", function (e) {
-        var carid = $(e.relatedTarget).data("id");
-        // Do Whatever you like to do,
+  <!-- Code for datatables -->
+  <script>
+
+    var dtable = $(".datatable").dataTable().api();
+
+    // Grab the datatables input box and alter how it is bound to events
+    $(".dataTables_filter input")
+      .unbind() // Unbind previous default bindings
+      .bind("input", function (e) { // Bind our desired behavior
+        // If the length is 3 or more characters, or the user pressed ENTER, search
+        if (this.value.length >= 3 || e.keyCode == 13) {
+          // Call the API search function
+          dtable.search(this.value).draw();
+        }
+        // Ensure we clear the search if they backspace far enough
+        if (this.value == "") {
+          dtable.search("").draw();
+        }
+        return;
       });
-    </script>
+  </script>
 </body>
 
 </html>

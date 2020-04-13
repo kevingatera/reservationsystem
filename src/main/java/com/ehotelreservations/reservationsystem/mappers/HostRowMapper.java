@@ -14,7 +14,7 @@ public class HostRowMapper implements RowMapper<Host> {
   public Host mapRow(ResultSet rs, int rowNum) throws SQLException {
 
     Host host = new Host();
-    host.setId(rs.getInt("host_ID"));
+    host.setHostId(rs.getInt("host_ID"));
     host.setFullName(rs.getString("full_name"));
     host.setFirstName(rs.getString("First_name"));
     host.setLastName(rs.getString("Last_name"));

@@ -4,6 +4,14 @@
   background-color: #eee;
 } */
 
+.wrapper {
+  display: inline-block;
+}
+
+.wrapper .content {
+  margin-left: 320px;
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -223,9 +231,9 @@
 
 /* For the sidebar */
 
-.wrapper {
+/* .wrapper {
   display: block;
-}
+} */
 
 #sidebar {
   min-width: 250px;
