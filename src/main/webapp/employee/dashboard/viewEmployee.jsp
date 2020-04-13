@@ -2,7 +2,7 @@
 session="false"%>
 <html>
 <jsp:include page="../../_header.jsp">
-  <jsp:param name="title" value="Show Property" />
+  <jsp:param name="title" value="Show Empoyee" />
 </jsp:include>
 
 <body>
@@ -33,13 +33,6 @@ session="false"%>
             </div>
 
             </hr><br>
-
-            <!-- <ul class="list-group">
-              <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong>Rental Agreements</strong></span>
-                125</li>
-               <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-            </ul> -->
 
           </div>
           <!--/col-3-->

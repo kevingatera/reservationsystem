@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
-public class User {
+public class User extends Address {
 
     // @Id
     // @GeneratedValue(strategy = GenerationType.AUTO)

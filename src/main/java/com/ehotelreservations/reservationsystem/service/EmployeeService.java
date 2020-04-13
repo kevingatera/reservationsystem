@@ -9,9 +9,9 @@ import java.util.List;
 import com.ehotelreservations.reservationsystem.enums.RoleName;
 import com.ehotelreservations.reservationsystem.model.Employee;
 import com.ehotelreservations.reservationsystem.model.Role;
-import com.ehotelreservations.reservationsystem.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
@@ -23,10 +23,13 @@ public class EmployeeService {
   EmployeeRepository employeeRepository;
 
   @Autowired
-  UserService userService;
+  EmployeeService userService;
 
   @Autowired
   private RoleService roleService;
+
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
@@ -47,39 +50,17 @@ public class EmployeeService {
     return employeeRepository.findById(id);
   }
 
-  public void save(User userForm) {
+  public void save(Employee employeeForm) {
     Role userRole = roleService.findByName(RoleName.EMPLOYEE);
-    userForm.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+    employeeForm.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
     try {
-      Employee employee = (Employee) userForm;
-      // employee.setEmail(userForm.getEmail());
-      // employee.setBranch_ID("Branch A");
-      // employee.setFirstName(userForm.getFirstName());
-      // employee.setLastName(userForm.getLastName());
-      // employee.setPhone(userForm.getPhoneNumber());
-      // employee.setPosition(userForm.setPosition());
-      // employee.setSalary(userForm.getSalary());;
+      Employee employee = (Employee) employeeForm;
+      employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
       employeeRepository.save(employee);
-      userService.save(userForm);
     } catch (Exception e) {
       logger.error("BAM", e);
       // TODO: handle exception
     }
-
   }
-
-  // public List<Employee> getAllEmployees(Integer pageNo, Integer pageSize,
-  // String sortBy)
-  // {
-  // Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-
-  // Page<Employee> pagedResult = repository.findAll(paging);
-
-  // if(pagedResult.hasContent()) {
-  // return pagedResult.getContent();
-  // } else {
-  // return new ArrayList<Employee>();
-  // }
-  // }
 }

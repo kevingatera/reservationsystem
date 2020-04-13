@@ -1,84 +1,216 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page session="false" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html>
-
-<html lang="en">
+<html>
 
 <jsp:include page="../_header.jsp">
-  <jsp:param name="title" value="Register an account" />
+  <jsp:param name="title" value="Register a new employee" />
 </jsp:include>
 
+
 <body>
+  <div class="wrapper">
 
-  <div class="container">
+    <!-- Page Content -->
+    <div class="content">
 
-    <form:form method="POST" action="${contextPath}/employee/registration" modelAttribute="userForm"
-      class="form-signin">
-      <h2 class="form-signin-heading">Create your account</h2>
-
-
-
-      <spring:bind path="firstName">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="text" path="firstName" class="form-control" placeholder="First Name" autofocus="true" />
-          <form:errors path="firstName"></form:errors>
+      <div class="container bootstrap snippet">
+        <div class="row">
+          <div class="col-sm-10">
+            <h3>Register a new employee</h3>
+          </div>
         </div>
-      </spring:bind>
+        <hr>
+        <div class="row">
+          <form:form class="form" action="${contextPath}/employee/registration" modelAttribute="employeeForm"
+            method="POST" id="registrationForm">
 
-      <spring:bind path="lastName">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="text" path="lastName" class="form-control" placeholder="Last Name" autofocus="true" />
-          <form:errors path="lastName"></form:errors>
+            <div class="row">
+              <spring:bind path="username">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label for="username">
+                      <h6>Username</h6>
+                    </label>
+                    <form:input type="username" class="form-control" path="username" placeholder="enter a username"
+                      title="enter a username" />
+                    <form:errors path="username"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+
+              <spring:bind path="password">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label for="password">
+                      <h6>Password</h6>
+                    </label>
+                    <form:input type="password" class="form-control" path="password" placeholder="enter a password"
+                      title="enter a password" />
+                    <form:errors path="password"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+            </div>
+            <hr>
+
+            <div class="row">
+              <spring:bind path="firstName">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label for="first_name">
+                      <h6>First name</h6>
+                    </label>
+                    <form:input type="text" class="form-control" path="firstName" id="first_name"
+                      placeholder="first name" title="enter your first name if any." />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+
+              <spring:bind path="lastName">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label for="last_name">
+                      <h6>Last name</h6>
+                    </label>
+                    <form:input type="text" class="form-control" path="lastName" id="last_name" placeholder="last name"
+                      title="enter your last name if any." />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+            </div>
+
+            <spring:bind path="lastName">
+              <div class="form-group">
+                <div class="col-xs-6">
+                  <label for="phone">
+                    <h6>Phone</h6>
+                  </label>
+                  <form:input type="text" class="form-control" path="phone" id="phone" placeholder="enter phone"
+                    title="enter your phone number if any." />
+                </div>
+              </div>
+            </spring:bind>
+
+            <spring:bind path="lastName">
+              <div class="form-group">
+                <div class="col-xs-6">
+                  <label for="email">
+                    <h6>Email</h6>
+                  </label>
+                  <form:input type="email" class="form-control" path="email" id="email" placeholder="you@email.com"
+                    title="enter your email." />
+                </div>
+              </div>
+            </spring:bind>
+
+            <hr>
+            <h5>Address Information</h5>
+
+            <div class="row">
+              <spring:bind path="streetNumber">
+                <div class="form-group ${status.error ? 'has-error' : ''} col-4">
+                  <div class="col-xs-6">
+                    <label>Street Number <span class="text-danger">*</span></label>
+                    <form:input type="number" class="form-control" path="streetNumber"
+                      placeholder="Enter Street Number" />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+
+              <spring:bind path="streetName">
+                <div class="form-group ${status.error ? 'has-error' : ''} col-8">
+                  <div class="col-xs-6">
+                    <label>Street Name <span class="text-danger">*</span></label>
+                    <form:input type="text" class="form-control" path="streetName" placeholder="Enter Street Name" />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+            </div>
+
+            <div class="row">
+              <spring:bind path="city">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label>City <span class="text-danger">*</span></label>
+                    <form:input type="text" path="city" class="form-control" placeholder="Enter City" />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+
+              <spring:bind path="province">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label>State/Province <span class="text-danger">*</span></label>
+                    <form:input type="text" path="province" class="form-control" placeholder="Enter State/Province" />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+
+              <spring:bind path="country">
+                <div class="form-group ${status.error ? 'has-error' : ''} col">
+                  <div class="col-xs-6">
+                    <label>Country<span class="text-danger">*</span></label>
+                    <form:input type="text" path="country" class="form-control" placeholder="Enter Country" />
+                    <form:errors path="lastName"></form:errors>
+                  </div>
+                </div>
+              </spring:bind>
+            </div>
+
+            <hr>
+
+            <div class="col-xs-12">
+              <br>
+              <button class="btn btn-lg btn-success pull-right" type="submit"><i
+                  class="glyphicon glyphicon-ok-sign"></i> Save</button>
+              <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+            </div>
+          </form:form>
+
         </div>
-      </spring:bind>
+        <!--/tab-pane-->
+      </div>
+      <!--/-->
 
-      <spring:bind path="phone">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="text" path="phone" class="form-control" placeholder="Phone Number" autofocus="true" />
-          <form:errors path="phone"></form:errors>
-        </div>
-      </spring:bind>
-
-      <spring:bind path="email">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="text" path="email" class="form-control" placeholder="Email" autofocus="true" />
-          <form:errors path="email"></form:errors>
-        </div>
-      </spring:bind>
-
-      <spring:bind path="username">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="text" path="username" class="form-control" placeholder="Username" autofocus="true" />
-          <form:errors path="username"></form:errors>
-        </div>
-      </spring:bind>
-
-
-      <spring:bind path="password">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="password" path="password" class="form-control" placeholder="Password" />
-          <form:errors path="password"></form:errors>
-        </div>
-      </spring:bind>
-
-      <!-- <spring:bind path="passwordConfirm">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-          <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password" />
-          <form:errors path="passwordConfirm"></form:errors>
-        </div>
-      </spring:bind> -->
-
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-    </form:form>
-
+    </div>
+    <!--/col-9-->
   </div>
+  <!--/row-->
 
-  <jsp:include page="../_footer.jsp"></jsp:include>
+  <script>
 
+    $(document).ready(function () {
+
+
+      var readURL = function (input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('.avatar').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+
+      $(".file-upload").on('change', function () {
+        readURL(this);
+      });
+    });
+  </script>
 </body>
-
 
 </html>
