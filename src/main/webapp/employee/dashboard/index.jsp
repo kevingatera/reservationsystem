@@ -82,6 +82,23 @@
           </div>
         </div>
         <!-- /Row -->
+
+
+        <div class="row w-100 mt-5">
+          <div class="col-md-3">
+            <div class="card border-info mx-sm-1 p-3">
+              <div class="card border-info shadow text-info p-3 my-card"><span class="fa fa-handshake"
+                  aria-hidden="true"></span></div>
+              <div class="text-info text-center mt-3">
+                <h4>Rental Agreements</h4>
+              </div>
+              <div class="text-info text-center mt-2">
+                <h1>${statsObject.totalRentalAgreements}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Row -->
       </div>
     </div>
 
