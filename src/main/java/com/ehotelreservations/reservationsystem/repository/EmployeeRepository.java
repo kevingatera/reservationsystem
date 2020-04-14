@@ -5,8 +5,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.mappers.EmployeeRowMapper;
@@ -61,26 +62,15 @@ public class EmployeeRepository {
   }
 
   public void save(Employee employee) {
-    // CALL create_employee ('admin002',
-    // '$2a$10$xC5u5L5sDX1SccqlcPj8iOOMXrlE3qpWY9yJjL0.RrhQf3gCSvKmW', '2020-04-05
-    // 10:50:32.653', 'Kevin', 'Gatera', 'kevingatera@gmail.com', '6135017089',
-    // 'Supervisor', 16000, 100, 402, 'Montfort', 'Ottawa', 'Ontario', 'Canada');
 
-    String sql = "insert into employee(branch_id, email, first_name, last_name, phone, position, salary)"
-        + "values(?,?,?,?,?,?,?)";
+    String sql = "CALL create_employee (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    jdbcTemplate.update(sql, new PreparedStatementSetter() {
-      @Override
-      public void setValues(PreparedStatement ps) throws SQLException {
-        ps.setInt(1, employee.getBranch_ID());
-        ps.setString(2, employee.getEmail());
-        ps.setString(3, employee.getFirstName());
-        ps.setString(4, employee.getLastName());
-        ps.setString(5, employee.getPhone());
-        ps.setString(6, employee.getPosition());
-        ps.setFloat(7, employee.getSalary());
-      }
-    });
+    // Info on dataTypes:
+    // https://www.cis.upenn.edu/~bcpierce/courses/629/jdkdocs/guide/jdbc/getstart/mapping.doc.html#1005039
+    jdbcTemplate.update(sql, employee.getUsername(), employee.getPassword(), Timestamp.valueOf(LocalDateTime.now()),
+        employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), "Supervisee",
+        BigDecimal.valueOf(16000.50f), 100, employee.getStreetNumber(), employee.getStreetName(), employee.getCity(),
+        employee.getProvince(), employee.getCountry());
   }
 
   public List<Employee> findByLastName(String lastname) {

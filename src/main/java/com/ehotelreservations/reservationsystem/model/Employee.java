@@ -29,4 +29,6 @@ public class Employee extends User {
 
     private Employee_Address address;
 
+    private User credentials;
+
 }

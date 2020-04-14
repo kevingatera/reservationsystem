@@ -1,6 +1,7 @@
 package com.ehotelreservations.reservationsystem.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -11,7 +12,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
-public class User {
+@EqualsAndHashCode(callSuper = false)
+public class User extends Address {
 
     // @Id
     // @GeneratedValue(strategy = GenerationType.AUTO)

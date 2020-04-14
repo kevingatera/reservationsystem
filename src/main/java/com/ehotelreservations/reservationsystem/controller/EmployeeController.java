@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ehotelreservations.reservationsystem.model.User;
+import com.ehotelreservations.reservationsystem.model.Employee;
 import com.ehotelreservations.reservationsystem.service.EmployeeService;
 import com.ehotelreservations.reservationsystem.service.SecurityService;
 import com.ehotelreservations.reservationsystem.validator.UserValidator;
@@ -35,25 +35,27 @@ public class EmployeeController {
 
   @GetMapping("/registration")
   public String registration(Model model) {
-    model.addAttribute("userForm", new User());
+    // model.addAttribute("userForm", new User());
+    model.addAttribute("employeeForm", new Employee());
+    // model.addAttribute("employeeAddressForm", new Employee_Address());
     // model.addAttribute("rolesList", roleService.findAll());
 
     return "employee/registration";
   }
 
   @PostMapping("/registration")
-  public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-    userValidator.validate(userForm, bindingResult);
+  public String registration(@ModelAttribute("employeeForm") Employee employeeForm, BindingResult bindingResult) {
+    userValidator.validate(employeeForm, bindingResult);
 
     if (bindingResult.hasErrors()) {
       return "employee/registration";
     }
 
-    employeeService.save(userForm);
+    employeeService.save(employeeForm);
 
-    securityService.autoLogin(userForm.getUsername(), userForm.getPassword());
+    securityService.autoLogin(employeeForm.getUsername(), employeeForm.getPassword());
 
-    return "redirect:/employee/index";
+    return "redirect:/employee/dashboard/index";
   }
 
   // TODO: This gets handled magically for now

@@ -18,7 +18,6 @@ import com.ehotelreservations.reservationsystem.model.GeneralStats;
 import com.ehotelreservations.reservationsystem.model.Guest;
 import com.ehotelreservations.reservationsystem.model.Host;
 import com.ehotelreservations.reservationsystem.model.Property;
-import com.ehotelreservations.reservationsystem.model.PropertyRental;
 import com.ehotelreservations.reservationsystem.model.RentalAgreement;
 import com.ehotelreservations.reservationsystem.model.User;
 import com.ehotelreservations.reservationsystem.model.address.Guest_Address;

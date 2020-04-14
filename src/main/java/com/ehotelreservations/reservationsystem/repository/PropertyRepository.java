@@ -27,8 +27,9 @@ public class PropertyRepository {
     // 10:50:32.653', 'Kevin', 'Gatera', 'kevingatera@gmail.com', '6135017089',
     // 'Supervisor', 16000, 100, 402, 'Montfort', 'Ottawa', 'Ontario', 'Canada');
 
-    String sql = "insert into property(branch_id, email, first_name, last_name, phone, position, salary)"
-        + "values(?,?,?,?,?,?,?)";
+    // String sql = "insert into property(branch_id, email, first_name, last_name,
+    // phone, position, salary)"
+    // + "values(?,?,?,?,?,?,?)";
 
     // Object[] params = new Object[] { //
     // // property.getProperty_ID(), //
