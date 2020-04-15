@@ -172,9 +172,8 @@
 
             <div class="col-xs-12">
               <br>
-              <button class="btn btn-lg btn-success pull-right" type="submit"><i
-                  class="glyphicon glyphicon-ok-sign"></i> Save</button>
-              <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+              <button class="btn btn-lg btn-success pull-right" type="submit"><i class="fas fa-save"></i> Save</button>
+              <button class="btn btn-lg" type="reset"><i class="fas fa-sync"></i> Reset</button>
             </div>
           </form:form>
 

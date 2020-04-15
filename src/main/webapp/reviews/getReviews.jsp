@@ -10,7 +10,7 @@ session="false"%>
 
   <div class="container">
     <h3>Here's a list of all Reviews</h3>
-    <div class="row col-md-6">
+    <div class="row col">
       <table class="table table-striped">
         <thead>
           <tr>

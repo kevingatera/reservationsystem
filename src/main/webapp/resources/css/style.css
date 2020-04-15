@@ -77,6 +77,14 @@ td {
   display: inline-table;
 }
 
+.titleContainer .float-right {
+  margin-right: -75px;
+}
+
+.titleContainer .float-left {
+  margin-left: -15px;
+}
+
 .my-card {
   position: absolute;
   left: 40%;
