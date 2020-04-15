@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class Address {
 
-  int streetNumber;
+  private int streetNumber;
 
-  String streetName;
+  private String streetName;
 
-  String city;
+  private String city;
 
-  String province;
+  private String province;
 
-  String country;
+  private String country;
 
 }

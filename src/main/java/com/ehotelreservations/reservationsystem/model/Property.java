@@ -1,8 +1,10 @@
 package com.ehotelreservations.reservationsystem.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class Property extends Address {
 
     private int propertyId;

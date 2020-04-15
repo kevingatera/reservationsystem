@@ -3,7 +3,6 @@ package com.ehotelreservations.reservationsystem.service;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.model.Property;
-import com.ehotelreservations.reservationsystem.model.PropertyRental;
 import com.ehotelreservations.reservationsystem.repository.PropertyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
