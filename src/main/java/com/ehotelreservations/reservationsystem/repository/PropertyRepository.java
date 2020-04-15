@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.ehotelreservations.reservationsystem.mappers.PropertyRentalRowMapper;
@@ -22,32 +23,17 @@ public class PropertyRepository {
   private JdbcTemplate jdbcTemplate;
 
   public Property save(Property property) {
-    // CALL create_property ('admin002',
-    // '$2a$10$xC5u5L5sDX1SccqlcPj8iOOMXrlE3qpWY9yJjL0.RrhQf3gCSvKmW', '2020-04-05
-    // 10:50:32.653', 'Kevin', 'Gatera', 'kevingatera@gmail.com', '6135017089',
-    // 'Supervisor', 16000, 100, 402, 'Montfort', 'Ottawa', 'Ontario', 'Canada');
 
-    // String sql = "insert into property(branch_id, email, first_name, last_name,
-    // phone, position, salary)"
-    // + "values(?,?,?,?,?,?,?)";
+    String sql = "CALL create_property (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    // Object[] params = new Object[] { //
-    // // property.getProperty_ID(), //
-    // property.getBranchID(), //
-    // property.getDescription(), //
-    // property.getAvailable(), //
-    // property.getBathrooms(), //
-    // property.getHostID(), //
-    // property.getRoomType(), //
-    // property.getReviewAverage(), //
-    // property.getType() //
-    // // TODO:
-    // };
-    // user.getName(), user.getPrice() };
+    // Info on dataTypes:
+    // https://www.cis.upenn.edu/~bcpierce/courses/629/jdkdocs/guide/jdbc/getstart/mapping.doc.html#1005039
+    jdbcTemplate.update(sql, property.getBranchID(), property.getDescription(), property.getAvailable(),
+        property.getBathrooms(), property.getHostID(), property.getRoomType(), BigDecimal.valueOf(16000.50f),
+        property.getType(), property.getStreetNumber(), property.getStreetName(), property.getCity(),
+        property.getProvince(), property.getCountry());
 
-    // jdbcTemplate.update(sql, params);
-
-    return new Property();
+    return property;
   }
 
   public Property findById(int id) {
@@ -134,38 +120,3 @@ public class PropertyRepository {
   }
 
 }
-
-// public int save(Property property) {
-// return jdbcTemplate.update("insert into property (name, age, created_date)
-// values(?,?,?)", property.getName(),
-// property.getAge(), LocalDateTime.now());
-// }
-
-// @GetMapping("/bulkcreate")
-// public String bulkcreate(){
-// // save a single Customer
-// repository.save(new Customer("Rajesh", "Bhojwani"));
-
-// // save a list of Customers
-// repository.saveAll(Arrays.asList(new Customer("Salim", "Khan")
-// , new Customer("Rajesh", "Parihar")
-// , new Customer("Rahul", "Dravid")
-// , new Customer("Dharmendra", "Bhojwani")));
-
-// return "Customers are created";
-// }
-
-// public List<Property> getRentedProperties() {
-// String sql = "select distinct property_ID,
-// property_type,room_type,bedrooms,bathrooms,"
-// + "max_propertys,property_description,available,avg_review,host_ID as
-// property.host_ID, branch_ID as property.branch_ID"
-// + "FROM rental_agreement r_a" + "INNER JOIN property p" + "on
-// r_a.property_ID=p.property_ID"
-// + "ORDER BY branch_ID, review_avg";
-
-// List<Property> properties = jdbcTemplate.query(sql, new
-// NestedRowMapper<>(Property.class));
-
-// return properties;
-// }
