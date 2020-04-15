@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> <%@page
-session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <jsp:include page="../../_header.jsp">
   <jsp:param name="title" value="Show Employees" />
@@ -15,7 +15,7 @@ session="false"%>
 
       <div class="container">
 
-        <div class="titleContainer">
+        <div class="titleContainer col">
           <div class="float-left">
             <h3>Here's a list of all Employees</h3>
           </div>
@@ -26,42 +26,10 @@ session="false"%>
         </div>
 
         <hr>
-        <div class="row col-md-6">
-          <table class="datatable table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Position</th>
-                <th scope="col">Salary</th>
-                <th scope="col">Branch</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Options</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="employee" items="${employeeList}">
-                <tr>
-                  <th scope="row">${employee.employeeId}</th>
-                  <td>${employee.firstName}</td>
-                  <td>${employee.lastName}</td>
-                  <td>${employee.email}</td>
-                  <td>${employee.position}</td>
-                  <td>${employee.salary}</td>
-                  <td>${employee.branch_ID}</td>
-                  <td>${employee.phone}</td>
-                  <td>
-                    <button type="button" class="btn btn-primary">
-                      <a href="viewEmployee/${employee.employeeId}"
-                        style="color: white; text-decoration: none;">View</a>
-                    </button>
-                  </td>
-                </tr>
-              </c:forEach>
-            </tbody>
-          </table>
+        <div class="row col">
+
+          <jsp:include page="_employeeListTable.jsp"></jsp:include>
+
         </div>
       </div>
     </div>
@@ -70,10 +38,6 @@ session="false"%>
     <div class="overlay"></div>
 
     <script>
-      // $("#modalShowCar").on("show.bs.modal", function (e) {
-      //   var carid = $(e.relatedTarget).data("id");
-      //   // Do Whatever you like to do,
-      // });
 
       var dtable = $(".datatable").dataTable().api();
 
