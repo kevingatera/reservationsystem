@@ -23,18 +23,6 @@ public class WebEmployeeSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    // http.antMatcher("/employee/**")
-		// 	.authorizeRequests().anyRequest().authenticated()//
-    //   .and()//
-    //   .formLogin()//
-    //   .loginPage("/employee/login")//
-		// 	.defaultSuccessUrl("/employee/index", true)//
-		// 	.permitAll()
-    //   .and()//
-    //   .logout()//
-    //   .logoutUrl("/employee/logout")//
-    //   .logoutSuccessUrl("/employee/login");
-		// http.csrf().disable();
 
     http.authorizeRequests()//
         .antMatchers("/resources/**", "/employee/registration").permitAll()//
@@ -46,7 +34,7 @@ public class WebEmployeeSecurityConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/employee/login") // Submit URL
         .loginPage("/employee/login")//
         .failureUrl("/employee/login?error=true")//
-        .defaultSuccessUrl("/employee/index")//
+        .defaultSuccessUrl("/employee/dashboard/index")//
         .permitAll()//
         .and()//
         .logout()//

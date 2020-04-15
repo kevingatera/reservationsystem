@@ -44,4 +44,7 @@ public class RentalAgreementService {
     return rentalAgreementRepository.findByBookingReference(id);
   }
 
+  public RentalAgreement getCheapest() {
+    return rentalAgreementRepository.getCheapest();
+  }
 }

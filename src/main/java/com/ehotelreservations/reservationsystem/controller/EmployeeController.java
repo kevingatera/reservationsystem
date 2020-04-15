@@ -35,10 +35,7 @@ public class EmployeeController {
 
   @GetMapping("/registration")
   public String registration(Model model) {
-    // model.addAttribute("userForm", new User());
     model.addAttribute("employeeForm", new Employee());
-    // model.addAttribute("employeeAddressForm", new Employee_Address());
-    // model.addAttribute("rolesList", roleService.findAll());
 
     return "employee/registration";
   }
@@ -58,18 +55,6 @@ public class EmployeeController {
     return "redirect:/employee/dashboard/index";
   }
 
-  // TODO: This gets handled magically for now
-  // @PostMapping("/employee/login")
-  // public String login(@ModelAttribute("loginForm") User loginForm,
-  // BindingResult bindingResult) {
-  // // userValidator.validate(loginForm, bindingResult);
-  // if (bindingResult.hasErrors()) {
-  // return "login";
-  // }
-  // securityService.autoLogin(loginForm.getUsername(), loginForm.getPassword());
-  // return "redirect:/welcome";
-  // }
-
   @GetMapping("/login")
   public String login(@RequestParam(value = "error", required = false) String error,
       @RequestParam(value = "logout", required = false) String logout, Model model) {
@@ -83,11 +68,6 @@ public class EmployeeController {
       model.addAttribute("message", "You have been logged out successfully.");
 
     return "employee/login";
-  }
-
-  @GetMapping({ "/", "/index" })
-  public String welcome(Model model) {
-    return "employee/dashboard/index";
   }
 
 }

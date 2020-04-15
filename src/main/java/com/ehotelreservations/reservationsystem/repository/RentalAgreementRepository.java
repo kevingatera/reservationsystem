@@ -97,4 +97,23 @@ public class RentalAgreementRepository {
         }
     }
 
+    public RentalAgreement getCheapest() {
+        String sql = "WITH min_rental(property_ID,guest_ID,host_ID,booking_reference,branch_ID,nightly_rate,agreement_start, agreement_end, agreement_signing,payment_status)"
+                + " AS(SELECT pa.property_ID as property_ID,pa.guest_ID as guest_ID,pa.host_ID as host_ID,pa.booking_reference as booking_reference,p.branch_ID as branch_ID,nightly_rate, agreement_start, agreement_end, agreement_signing, payment_status"
+                + " FROM payment pa"
+                + " INNER JOIN rental_agreement ra ON pa.property_ID=ra.property_ID AND pa.guest_ID=ra.guest_ID AND pa.booking_reference=ra.booking_reference"
+                + " INNER JOIN property p" + " ON pa.property_ID=p.property_ID"
+                + " INNER JOIN pricing pr ON pa.property_ID=pr.property_ID AND pa.host_ID=pr.host_ID) "
+                + " SELECT * FROM min_rental mr" + " WHERE mr.payment_status='Completed'"
+                + " AND nightly_rate=(Select min(nightly_rate) From min_rental);";
+
+        try {
+            RentalAgreement rentalAgreement = jdbcTemplate.queryForObject(sql, new RentalAgreementRowMapper());
+            return rentalAgreement;
+
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
 }

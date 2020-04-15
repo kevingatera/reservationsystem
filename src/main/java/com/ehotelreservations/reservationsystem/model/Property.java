@@ -3,7 +3,7 @@ package com.ehotelreservations.reservationsystem.model;
 import lombok.Data;
 
 @Data
-public class Property {
+public class Property extends Address {
 
     private int propertyId;
 
