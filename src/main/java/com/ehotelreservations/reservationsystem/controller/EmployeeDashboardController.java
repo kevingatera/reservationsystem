@@ -202,4 +202,13 @@ public class EmployeeDashboardController {
     return currentPath + "viewProperty";
   }
 
+  @GetMapping("/editProperty/{id}")
+  public String editProperty(@PathVariable("id") int id, Model model) {
+    Property property = propertyService.getProperty(id);
+    Property_Address propertyAddress = addressService.findByPropertyId(id);
+    model.addAttribute("editProperty", property);
+    model.addAttribute("editPropertyAddress", propertyAddress);
+    return currentPath + "editProperty";
+  }
+
 }
