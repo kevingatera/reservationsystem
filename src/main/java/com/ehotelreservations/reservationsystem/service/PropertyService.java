@@ -51,10 +51,6 @@ public class PropertyService {
     return propertyRepository.findAll();
   }
 
-  public List<PropertyRental> getAllPropertyRentals() {
-    return propertyRepository.findAllPropertyRentals();
-  }
-
   // http://goo.gl/7fxvVf
   // public Page<Property> getAllPropertys(Integer pageNo, Integer pageSize) {
 
